@@ -1,0 +1,1907 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAT GT — Design System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           CSS VARIABLES — SAT BRAND TOKENS
+           ============================================ */
+        :root {
+            --sat-navy: #093758;
+            --sat-blue: #003876;
+            --sat-blue-light: #00509e;
+            --sat-blue-hover: #0078D4;
+            --sat-blue-sky: #4299e1;
+            --sat-green: #92D050;
+            --sat-green-dark: #107C10;
+            --sat-green-olive: #739D3C;
+            --sat-orange: #C55A11;
+            --sat-red: #D13438;
+            --sat-red-dark: #C62828;
+            --sat-yellow: #FFC107;
+            --sat-gray: #666666;
+            --sat-gray-light: #CCCCCC;
+            --sat-white: #ffffff;
+            --sat-bg: #f0f2f5;
+            --sat-bg-card: #ffffff;
+            --sat-text: #1a1a2e;
+            --sat-text-muted: #64748b;
+            --sat-border: #e2e8f0;
+            --sat-shadow: 0 1px 3px rgba(9, 55, 88, 0.08), 0 4px 16px rgba(9, 55, 88, 0.04);
+            --sat-shadow-lg: 0 4px 24px rgba(9, 55, 88, 0.12);
+            --sat-radius: 10px;
+            --sat-radius-sm: 6px;
+            --font-body: 'DM Sans', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+        }
+
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; font-size: 16px; }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--sat-bg);
+            color: var(--sat-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ============================================
+           LAYOUT
+           ============================================ */
+        .app {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            min-height: 100vh;
+        }
+
+        @media (max-width: 900px) {
+            .app { grid-template-columns: 1fr; }
+            .sidebar { display: none; }
+            .sidebar.open { display: flex; position: fixed; z-index: 100; inset: 0; }
+            .mobile-toggle { display: flex !important; }
+        }
+
+        /* ============================================
+           SIDEBAR
+           ============================================ */
+        .sidebar {
+            background: var(--sat-navy);
+            color: var(--sat-white);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-header {
+            padding: 28px 24px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 6px;
+        }
+
+        .sidebar-logo img {
+            height: 36px;
+            filter: brightness(0) invert(1);
+        }
+
+        .sidebar-logo-text {
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .sidebar-logo-sub {
+            font-size: 11px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.5);
+            margin-top: 2px;
+        }
+
+        .sidebar-badge {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.12);
+            color: rgba(255,255,255,0.7);
+            margin-top: 10px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .sidebar-nav {
+            padding: 16px 12px;
+            flex: 1;
+        }
+
+        .nav-section-title {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.35);
+            padding: 16px 12px 6px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 12px;
+            border-radius: 8px;
+            color: rgba(255,255,255,0.65);
+            text-decoration: none;
+            font-size: 13.5px;
+            font-weight: 500;
+            transition: all 0.15s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.08);
+            color: var(--sat-white);
+        }
+
+        .nav-link.active {
+            background: rgba(255,255,255,0.12);
+            color: var(--sat-white);
+        }
+
+        .nav-icon {
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        /* ============================================
+           MAIN CONTENT
+           ============================================ */
+        .main {
+            padding: 40px 48px 80px;
+            max-width: 1100px;
+        }
+
+        @media (max-width: 900px) {
+            .main { padding: 24px 16px 60px; }
+        }
+
+        .mobile-toggle {
+            display: none !important;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--sat-navy);
+            color: white;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: var(--sat-shadow-lg);
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ============================================
+           PAGE HEADER
+           ============================================ */
+        .page-header {
+            margin-bottom: 48px;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--sat-navy);
+            line-height: 1.1;
+        }
+
+        .page-header p {
+            font-size: 15px;
+            color: var(--sat-text-muted);
+            margin-top: 8px;
+            max-width: 560px;
+        }
+
+        /* ============================================
+           SECTIONS
+           ============================================ */
+        .section {
+            margin-bottom: 56px;
+            scroll-margin-top: 24px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--sat-navy);
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 22px;
+            background: var(--sat-blue-hover);
+            border-radius: 2px;
+        }
+
+        .section-desc {
+            font-size: 14px;
+            color: var(--sat-text-muted);
+            margin-bottom: 24px;
+        }
+
+        /* ============================================
+           CARDS — COMPONENT DISPLAY
+           ============================================ */
+        .component-card {
+            background: var(--sat-bg-card);
+            border: 1px solid var(--sat-border);
+            border-radius: var(--sat-radius);
+            overflow: hidden;
+            margin-bottom: 24px;
+            box-shadow: var(--sat-shadow);
+            transition: box-shadow 0.2s ease;
+        }
+
+        .component-card:hover {
+            box-shadow: var(--sat-shadow-lg);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--sat-border);
+            background: #fafbfc;
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--sat-text);
+        }
+
+        .card-tags {
+            display: flex;
+            gap: 6px;
+        }
+
+        .tag {
+            font-size: 11px;
+            font-weight: 500;
+            padding: 3px 10px;
+            border-radius: 20px;
+            background: #eef2ff;
+            color: var(--sat-blue);
+        }
+
+        .tag.wp { background: #e0f2fe; color: #0369a1; }
+        .tag.email { background: #fef3c7; color: #92400e; }
+        .tag.css { background: #ede9fe; color: #6d28d9; }
+        .tag.pa { background: #fce7f3; color: #9d174d; }
+
+        .card-preview {
+            padding: 32px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fb;
+            min-height: 100px;
+        }
+
+        .card-preview.dark {
+            background: #1e293b;
+        }
+
+        .card-code {
+            position: relative;
+            border-top: 1px solid var(--sat-border);
+        }
+
+        .card-code-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background: #fafbfc;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--sat-text-muted);
+            transition: background 0.15s;
+        }
+
+        .card-code-toggle:hover {
+            background: #f0f2f5;
+        }
+
+        .card-code-toggle .arrow {
+            transition: transform 0.2s;
+            font-size: 10px;
+        }
+
+        .card-code-toggle.open .arrow {
+            transform: rotate(180deg);
+        }
+
+        .code-block {
+            display: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .code-block.show {
+            display: block;
+        }
+
+        .code-block pre {
+            margin: 0;
+            padding: 20px;
+            background: #0f172a;
+            color: #e2e8f0;
+            font-family: var(--font-mono);
+            font-size: 12.5px;
+            line-height: 1.7;
+            overflow-x: auto;
+            max-height: 400px;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 6px 14px;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.1);
+            color: #94a3b8;
+            border: 1px solid rgba(255,255,255,0.1);
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s;
+            z-index: 5;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255,255,255,0.18);
+            color: #fff;
+        }
+
+        .copy-btn.copied {
+            background: var(--sat-green-dark);
+            color: white;
+            border-color: var(--sat-green-dark);
+        }
+
+        /* ============================================
+           COLORS GRID
+           ============================================ */
+        .colors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 14px;
+        }
+
+        .color-chip {
+            border-radius: var(--sat-radius);
+            overflow: hidden;
+            border: 1px solid var(--sat-border);
+            background: white;
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        .color-chip:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--sat-shadow-lg);
+        }
+
+        .color-swatch {
+            height: 72px;
+            display: flex;
+            align-items: flex-end;
+            padding: 8px 10px;
+        }
+
+        .color-info {
+            padding: 10px 12px;
+        }
+
+        .color-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--sat-text);
+        }
+
+        .color-hex {
+            font-size: 11px;
+            font-family: var(--font-mono);
+            color: var(--sat-text-muted);
+        }
+
+        /* ============================================
+           BADGE PREVIEWS
+           ============================================ */
+        .badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 12px;
+            color: white;
+        }
+
+        /* ============================================
+           FORM PREVIEW
+           ============================================ */
+        .form-preview-container {
+            max-width: 420px;
+            width: 100%;
+        }
+
+        .sigma-form-card-preview {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 32px;
+        }
+
+        .sigma-form-card-preview .sigma-logo-preview {
+            display: block;
+            margin: 0 auto 20px;
+            height: 48px;
+        }
+
+        .sigma-form-card-preview .sigma-headline-preview {
+            text-align: center;
+            color: var(--sat-text);
+            font-size: 15px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .sigma-form-card-preview .form-group-preview {
+            margin-bottom: 14px;
+        }
+
+        .sigma-form-card-preview label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 5px;
+        }
+
+        .sigma-form-card-preview input,
+        .sigma-form-card-preview select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: var(--font-body);
+            transition: border-color 0.2s;
+            background: white;
+        }
+
+        .sigma-form-card-preview input:focus,
+        .sigma-form-card-preview select:focus {
+            outline: none;
+            border-color: var(--sat-blue);
+        }
+
+        .sigma-form-card-preview .btn-preview {
+            width: 100%;
+            padding: 12px;
+            background: var(--sat-blue);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: var(--font-body);
+            margin-top: 8px;
+            transition: background 0.2s;
+        }
+
+        .sigma-form-card-preview .btn-preview:hover {
+            background: var(--sat-blue-light);
+        }
+
+        /* ============================================
+           EMAIL PREVIEW
+           ============================================ */
+        .email-preview {
+            max-width: 520px;
+            width: 100%;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            overflow: hidden;
+            font-size: 14px;
+        }
+
+        .email-topbar {
+            background: #f1f3f5;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .email-dot {
+            width: 10px; height: 10px; border-radius: 50%;
+        }
+
+        .email-body-preview {
+            padding: 28px 24px;
+        }
+
+        .email-field {
+            margin-bottom: 8px;
+        }
+
+        .email-field strong {
+            color: var(--sat-text);
+        }
+
+        .email-btn-preview {
+            display: inline-block;
+            background: var(--sat-blue-hover);
+            color: white;
+            padding: 14px 36px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            margin: 16px 0;
+        }
+
+        /* ============================================
+           TABLE PREVIEW
+           ============================================ */
+        .table-preview {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .table-preview table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 8px;
+            overflow: hidden;
+            font-size: 13.5px;
+        }
+
+        .table-preview th {
+            background: var(--sat-navy);
+            color: white;
+            padding: 13px 12px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .table-preview td {
+            padding: 11px 12px;
+            text-align: center;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: middle;
+        }
+
+        .table-preview td:first-child {
+            text-align: left;
+            padding-left: 16px;
+            font-weight: 500;
+        }
+
+        .table-preview tbody tr:nth-child(even) { background: #f8f9fa; }
+        .table-preview tbody tr:nth-child(odd) { background: white; }
+
+        .table-preview tbody tr:hover { background: #eef3ff; }
+
+        .dl-icon {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            background: #e8f0fe;
+            border-radius: 4px;
+            text-align: center;
+            line-height: 28px;
+            font-size: 14px;
+            transition: transform 0.2s;
+        }
+
+        .dl-icon:hover { transform: scale(1.15); }
+
+        /* ============================================
+           ANIMATION PREVIEW
+           ============================================ */
+        .anim-preview {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .zoom-animation-demo {
+            animation: zoom-in-out 2s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes zoom-in-out {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.12); }
+        }
+
+        .pulse-demo {
+            animation: pulse-ring 1.8s ease-in-out infinite;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: var(--sat-blue);
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            position: relative;
+        }
+
+        .pulse-demo::after {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 2px solid var(--sat-blue);
+            animation: pulse-ring 1.8s ease-in-out infinite;
+            opacity: 0.4;
+        }
+
+        @keyframes pulse-ring {
+            0%, 100% { transform: scale(1); opacity: 0.4; }
+            50% { transform: scale(1.15); opacity: 0.1; }
+        }
+
+        /* ============================================
+           IFRAME SNIPPET
+           ============================================ */
+        .iframe-preview {
+            width: 100%;
+            max-width: 480px;
+            background: #f4f6f8;
+            border: 2px dashed #cbd5e1;
+            border-radius: 10px;
+            padding: 24px;
+            text-align: center;
+            color: var(--sat-text-muted);
+            font-size: 14px;
+        }
+
+        .iframe-preview .icon-lg {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        /* ============================================
+           SEARCH / FILTER
+           ============================================ */
+        .search-bar {
+            position: relative;
+            margin-bottom: 32px;
+            max-width: 400px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 11px 16px 11px 40px;
+            border: 1px solid var(--sat-border);
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: 14px;
+            background: white;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--sat-blue-hover);
+            box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.1);
+        }
+
+        .search-bar .search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 15px;
+        }
+
+        /* ============================================
+           TOAST
+           ============================================ */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: var(--sat-navy);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 13.5px;
+            font-weight: 500;
+            box-shadow: 0 8px 32px rgba(9, 55, 88, 0.3);
+            z-index: 200;
+            opacity: 0;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* ============================================
+           LINK PREVIEW
+           ============================================ */
+        .link-row-dark {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .link-row-dark a {
+            color: white !important;
+            text-decoration: none;
+            font-size: 14px;
+            transition: opacity 0.2s;
+        }
+
+        .link-row-dark a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        /* ============================================
+           WIDGET PREVIEW
+           ============================================ */
+        .widget-chat-preview {
+            max-width: 320px;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+        }
+
+        .widget-header {
+            background: var(--sat-blue);
+            color: white;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .widget-header img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: white;
+            padding: 2px;
+        }
+
+        .widget-header-text {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .widget-body {
+            background: white;
+            padding: 16px;
+        }
+
+        .widget-msg {
+            background: #f0f2f5;
+            border-radius: 12px 12px 12px 2px;
+            padding: 10px 14px;
+            font-size: 13px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .widget-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .widget-chip {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--sat-blue);
+            color: var(--sat-blue);
+            font-size: 12px;
+            font-weight: 500;
+            background: white;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .widget-chip:hover {
+            background: var(--sat-blue);
+            color: white;
+        }
+
+        /* ============================================
+           UTILITY
+           ============================================ */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 700px) {
+            .grid-2 { grid-template-columns: 1fr; }
+        }
+
+        .text-center { text-align: center; }
+        .mt-8 { margin-top: 8px; }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+<div class="app">
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <img src="https://portal.sat.gob.gt/portal/wp-content/uploads/2021/06/ISOLOGOTIPO_SAT.svg" alt="SAT" onerror="this.style.display='none'">
+                <div>
+                    <div class="sidebar-logo-text">Design System</div>
+                    <div class="sidebar-logo-sub">Portal SAT GT</div>
+                </div>
+            </div>
+            <div class="sidebar-badge">v1.0 — Feb 2026</div>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section-title">Fundamentos</div>
+            <a class="nav-link active" data-target="colores" onclick="scrollToSection('colores')">
+                <span class="nav-icon">🎨</span> Colores
+            </a>
+            <a class="nav-link" data-target="tipografia" onclick="scrollToSection('tipografia')">
+                <span class="nav-icon">🔤</span> Tipografía
+            </a>
+
+            <div class="nav-section-title">Componentes UI</div>
+            <a class="nav-link" data-target="badges" onclick="scrollToSection('badges')">
+                <span class="nav-icon">🏷️</span> Status Badges
+            </a>
+            <a class="nav-link" data-target="botones" onclick="scrollToSection('botones')">
+                <span class="nav-icon">🔘</span> Botones
+            </a>
+            <a class="nav-link" data-target="formulario" onclick="scrollToSection('formulario')">
+                <span class="nav-icon">📋</span> Formulario Chat
+            </a>
+            <a class="nav-link" data-target="tablas" onclick="scrollToSection('tablas')">
+                <span class="nav-icon">📊</span> Tablas
+            </a>
+
+            <div class="nav-section-title">Plantillas</div>
+            <a class="nav-link" data-target="email" onclick="scrollToSection('email')">
+                <span class="nav-icon">📧</span> Email Notificación
+            </a>
+            <a class="nav-link" data-target="chatbot" onclick="scrollToSection('chatbot')">
+                <span class="nav-icon">🤖</span> Chatbot RITA
+            </a>
+            <a class="nav-link" data-target="five9" onclick="scrollToSection('five9')">
+                <span class="nav-icon">💬</span> Five9 Widget
+            </a>
+
+            <div class="nav-section-title">Utilidades</div>
+            <a class="nav-link" data-target="animaciones" onclick="scrollToSection('animaciones')">
+                <span class="nav-icon">✨</span> Animaciones
+            </a>
+            <a class="nav-link" data-target="iframes" onclick="scrollToSection('iframes')">
+                <span class="nav-icon">🖼️</span> Iframes WordPress
+            </a>
+            <a class="nav-link" data-target="links" onclick="scrollToSection('links')">
+                <span class="nav-icon">🔗</span> Links Blancos
+            </a>
+        </nav>
+    </aside>
+
+    <!-- ============ MAIN ============ -->
+    <main class="main">
+
+        <div class="page-header">
+            <h1>SAT GT — Design System</h1>
+            <p>Librería de componentes, patrones y snippets para el portal de la Superintendencia de Administración Tributaria de Guatemala.</p>
+        </div>
+
+        <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Buscar componente..." id="searchInput" oninput="filterComponents()">
+        </div>
+
+        <!-- =====================================
+             COLORES
+             ===================================== -->
+        <section class="section" id="colores" data-keywords="colores colors paleta brand">
+            <h2 class="section-title">Colores Institucionales</h2>
+            <p class="section-desc">Paleta de colores oficial del portal SAT GT. Clic en cualquier color para copiar el código hexadecimal.</p>
+            <div class="colors-grid">
+                <div class="color-chip" onclick="copyToClipboard('#093758', this)">
+                    <div class="color-swatch" style="background:#093758"></div>
+                    <div class="color-info"><div class="color-name">Navy SAT</div><div class="color-hex">#093758</div></div>
+                </div>
+                <div class="color-chip" onclick="copyToClipboard('#003876', this)">
+                    <div class="color-swatch" style="background:#003876"></div>
+                    <div class="color-info"><div class="color-name">Azul SAT</div><div class="color-hex">#003876</div></div>
+                </div>
+                <div class="color-chip" onclick="copyToClipboard('#00509e', this)">
+                    <div class="color-swatch" style="background:#00509e"></div>
+                    <div class="color-info"><div class="color-name">Azul Hover</div><div class="color-hex">#00509e</div></div>
+                </div>
+                <div class="color-chip" onclick="copyToClipboard('#0078D4', this)">
+                    <div class="color-swatch" style="background:#0078D4"></div>
+                    <div class="color-info"><div class="color-name">Azul Botón</div><div class="color-hex">#0078D4</div></div>
+                </div>
+                <div class="color-chip" onclick="copyToClipboard('#92D050', this)">
+                    <div class="color-swatch" style="background:#92D050"></div>
+                    <div class="color-info"><div class="color-name">Verde Asignado</div><div class="color-hex">#92D050</div></div>
+                </div>
+                <div class="color-chip" onclick="copyToClipboard('#107C10', this)">
+                    <div class="color-swatch" style="background:#107C10"></div>
+                    <div class="color-info"><div class="color-name">Verde Atendido</div><div class="color-hex">#107C10</div></div>
+                </div>
+                <div class="color-chip" onclick="copyToClipboard('#739D3C', this)">
+                    <div class="color-swatch" style="background:#739D3C"></div>
+                    <div class="color-info"><div class="color-name">Verde Sí</div><div class="color-hex">#739D3C</div></div>
+                </div>
+                <div class="color-chip" onclick="copyToClipboard('#FFC107', this)">
+                    <div class="color-swatch" style="background:#FFC107"></div>
+                    <div class="color-info"><div class="color-name">Amarillo Programado</div><div class="color-hex">#FFC107</div></div>
+                </div>
+                <div class="color-chip" onclick="copyToClipboard('#C55A11', this)">
+                    <div class="color-swatch" style="background:#C55A11"></div>
+                    <div class="color-info"><div class="color-name">Naranja No</div><div class="color-hex">#C55A11</div></div>
+                </div>
+                <div class="color-chip" onclick="copyToClipboard('#D13438', this)">
+                    <div class="color-swatch" style="background:#D13438"></div>
+                    <div class="color-info"><div class="color-name">Rojo Rechazado</div><div class="color-hex">#D13438</div></div>
+                </div>
+                <div class="color-chip" onclick="copyToClipboard('#0070C0', this)">
+                    <div class="color-swatch" style="background:#0070C0"></div>
+                    <div class="color-info"><div class="color-name">Azul Archivado</div><div class="color-hex">#0070C0</div></div>
+                </div>
+                <div class="color-chip" onclick="copyToClipboard('#666666', this)">
+                    <div class="color-swatch" style="background:#666666"></div>
+                    <div class="color-info"><div class="color-name">Gris Default</div><div class="color-hex">#666666</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================
+             TIPOGRAFÍA
+             ===================================== -->
+        <section class="section" id="tipografia" data-keywords="tipografia fuentes fonts texto">
+            <h2 class="section-title">Tipografía</h2>
+            <p class="section-desc">Fuentes utilizadas en los componentes del portal y correos electrónicos.</p>
+            <div class="component-card">
+                <div class="card-header">
+                    <span class="card-title">Font Stack</span>
+                    <div class="card-tags"><span class="tag css">CSS</span></div>
+                </div>
+                <div class="card-preview" style="flex-direction:column; align-items:flex-start; gap:20px; padding:32px;">
+                    <div>
+                        <div style="font-size:11px;color:var(--sat-text-muted);margin-bottom:4px;">Body / UI — Segoe UI Stack</div>
+                        <div style="font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif; font-size:22px; font-weight:600;">SAT Guatemala — Portal Digital</div>
+                    </div>
+                    <div>
+                        <div style="font-size:11px;color:var(--sat-text-muted);margin-bottom:4px;">Monospace — Código</div>
+                        <div style="font-family:'JetBrains Mono','Courier New',monospace; font-size:16px;">concat('background-color: ', '#0078D4')</div>
+                    </div>
+                    <div>
+                        <div style="font-size:11px;color:var(--sat-text-muted);margin-bottom:4px;">Email Safe Stack</div>
+                        <div style="font-family:Arial,Helvetica,sans-serif; font-size:18px;">Hola, se ha registrado el documento</div>
+                    </div>
+                </div>
+                <div class="card-code">
+                    <button class="card-code-toggle" onclick="toggleCode(this)">
+                        <span>Ver código CSS</span><span class="arrow">▼</span>
+                    </button>
+                    <div class="code-block" id="code-tipografia">
+                        <button class="copy-btn" onclick="copyCode('code-tipografia')">Copiar</button>
+<pre>/* Font stack principal — UI del portal */
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+/* Font stack para correos HTML (safe fonts) */
+font-family: Arial, Helvetica, sans-serif;
+
+/* Monospace — fragmentos de código */
+font-family: 'JetBrains Mono', 'Courier New', monospace;</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================
+             STATUS BADGES
+             ===================================== -->
+        <section class="section" id="badges" data-keywords="badges estado status tag etiqueta color concat power automate">
+            <h2 class="section-title">Status Badges</h2>
+            <p class="section-desc">Badges de estado usados en correos de Power Automate con colores dinámicos vía <code>concat()</code>.</p>
+
+            <!-- Correspondencia badges -->
+            <div class="component-card">
+                <div class="card-header">
+                    <span class="card-title">Badges — Correspondencia</span>
+                    <div class="card-tags"><span class="tag pa">Power Automate</span><span class="tag email">Email</span></div>
+                </div>
+                <div class="card-preview">
+                    <div class="badge-row">
+                        <span class="status-badge" style="background:#92D050;color:#000">Asignado</span>
+                        <span class="status-badge" style="background:#0070C0">Archivado</span>
+                        <span class="status-badge" style="background:#CCCCCC;color:#000">Default</span>
+                    </div>
+                </div>
+                <div class="card-code">
+                    <button class="card-code-toggle" onclick="toggleCode(this)">
+                        <span>Ver código concat()</span><span class="arrow">▼</span>
+                    </button>
+                    <div class="code-block" id="code-badge-corresp">
+                        <button class="copy-btn" onclick="copyCode('code-badge-corresp')">Copiar</button>
+<pre>concat(
+  '&lt;span style="display: inline-block; padding: 5px 15px; border-radius: 15px; font-weight: bold; ',
+  if(equals(triggerBody()?['Estado_x003a_/Value'], 'Asignado'),
+    'background-color: #92D050; color: #000000;',
+  if(equals(triggerBody()?['Estado_x003a_/Value'], 'Archivado'),
+    'background-color: #0070C0; color: #FFFFFF;',
+    'background-color: #CCCCCC; color: #000000;')),
+  '"&gt;',
+  triggerBody()?['Estado_x003a_/Value'],
+  '&lt;/span&gt;'
+)</pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RITA / Chatbot badges -->
+            <div class="component-card">
+                <div class="card-header">
+                    <span class="card-title">Badges — Solicitudes RITA</span>
+                    <div class="card-tags"><span class="tag pa">Power Automate</span><span class="tag email">Email</span></div>
+                </div>
+                <div class="card-preview">
+                    <div class="badge-row">
+                        <span class="status-badge" style="background:#0078D4">Enviado</span>
+                        <span class="status-badge" style="background:#FFC107;color:#000">Programado</span>
+                        <span class="status-badge" style="background:#107C10">Atendido</span>
+                        <span class="status-badge" style="background:#D13438">Rechazado</span>
+                    </div>
+                </div>
+                <div class="card-code">
+                    <button class="card-code-toggle" onclick="toggleCode(this)">
+                        <span>Ver código concat()</span><span class="arrow">▼</span>
+                    </button>
+                    <div class="code-block" id="code-badge-rita">
+                        <button class="copy-btn" onclick="copyCode('code-badge-rita')">Copiar</button>
+<pre>concat(
+  '&lt;span style="display: inline-block; padding: 4px 12px; border-radius: 20px; font-weight: bold; color: #FFFFFF; ',
+  if(equals(triggerOutputs()?['body/Estado/Value'], 'Enviado'), 'background-color: #0078D4;',
+  if(equals(triggerOutputs()?['body/Estado/Value'], 'Programado'), 'background-color: #FFC107; color: #000000;',
+  if(equals(triggerOutputs()?['body/Estado/Value'], 'Atendido'), 'background-color: #107C10;',
+  if(equals(triggerOutputs()?['body/Estado/Value'], 'Rechazado'), 'background-color: #D13438;',
+  'background-color: #666666;')))),
+  '"&gt;',
+  triggerOutputs()?['body/Estado/Value'],
+  '&lt;/span&gt;'
+)</pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sí / No badges -->
+            <div class="component-card">
+                <div class="card-header">
+                    <span class="card-title">Badges — Sí / No</span>
+                    <div class="card-tags"><span class="tag pa">Power Automate</span><span class="tag email">Email</span></div>
+                </div>
+                <div class="card-preview">
+                    <div class="badge-row">
+                        <span class="status-badge" style="background:#739D3C">Sí</span>
+                        <span class="status-badge" style="background:#C55A11">No</span>
+                        <span class="status-badge" style="background:#808080">N/A</span>
+                    </div>
+                </div>
+                <div class="card-code">
+                    <button class="card-code-toggle" onclick="toggleCode(this)">
+                        <span>Ver código concat()</span><span class="arrow">▼</span>
+                    </button>
+                    <div class="code-block" id="code-badge-sino">
+                        <button class="copy-btn" onclick="copyCode('code-badge-sino')">Copiar</button>
+<pre>concat(
+  '&lt;div style="display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 12px; text-align: center; background-color: ',
+  if(equals(toLower(body('Campo')?['Value']), 'sí'), '#739D3C',
+  if(equals(toLower(body('Campo')?['Value']), 'no'), '#C55A11', '#808080')),
+  '; color: white;"&gt;',
+  body('Campo')?['Value'],
+  '&lt;/div&gt;'
+)</pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Publicar / Retirar -->
+            <div class="component-card">
+                <div class="card-header">
+                    <span class="card-title">Badges — Publicar / Retirar Contenido</span>
+                    <div class="card-tags"><span class="tag pa">Power Automate</span><span class="tag email">Email</span></div>
+                </div>
+                <div class="card-preview">
+                    <div class="badge-row">
+                        <span class="status-badge" style="background:#1976D2">Publicar</span>
+                        <span class="status-badge" style="background:#C62828">Retirar Contenido</span>
+                        <span class="status-badge" style="background:#2E7D32">Otro</span>
+                    </div>
+                </div>
+                <div class="card-code">
+                    <button class="card-code-toggle" onclick="toggleCode(this)">
+                        <span>Ver código concat()</span><span class="arrow">▼</span>
+                    </button>
+                    <div class="code-block" id="code-badge-publicar">
+                        <button class="copy-btn" onclick="copyCode('code-badge-publicar')">Copiar</button>
+<pre>concat(
+  '&lt;span style="display: inline-block; padding: 4px 12px; border-radius: 20px; font-weight: bold; color: #FFFFFF; ',
+  if(equals(triggerBody()?['Accion/Value'], 'Publicar'), 'background-color: #1976D2;',
+  if(equals(triggerBody()?['Accion/Value'], 'Retirar Contenido'), 'background-color: #C62828;',
+  'background-color: #2E7D32;')),
+  '"&gt;',
+  triggerBody()?['Accion/Value'],
+  '&lt;/span&gt;'
+)</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================
+             BOTONES
+             ===================================== -->
+        <section class="section" id="botones" data-keywords="boton button cta ver documento enlace link">
+            <h2 class="section-title">Botones</h2>
+            <p class="section-desc">Botones para correos HTML y componentes del portal.</p>
+            <div class="component-card">
+                <div class="card-header">
+                    <span class="card-title">Botón "Ver Documento" — Email</span>
+                    <div class="card-tags"><span class="tag email">Email</span><span class="tag pa">Power Automate</span></div>
+                </div>
+                <div class="card-preview">
+                    <a href="#" class="email-btn-preview" style="cursor:default;" onclick="event.preventDefault()">📄 Ver Documento</a>
+                </div>
+                <div class="card-code">
+                    <button class="card-code-toggle" onclick="toggleCode(this)">
+                        <span>Ver código concat()</span><span class="arrow">▼</span>
+                    </button>
+                    <div class="code-block" id="code-btn-doc">
+                        <button class="copy-btn" onclick="copyCode('code-btn-doc')">Copiar</button>
+<pre>concat(
+  '&lt;p style="text-align: center; margin: 20px 0;"&gt;',
+  '&lt;a href="',
+  outputs('Obtener_propiedades_del_archivo')?['body/{Link}'],
+  '" style="background-color: #0078d4; color: white; padding: 14px 36px; ',
+  'text-decoration: none; border-radius: 5px; display: inline-block; ',
+  'font-weight: bold; font-size: 16px;"&gt;📄 Ver Documento&lt;/a&gt;',
+  '&lt;/p&gt;'
+)</pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="component-card">
+                <div class="card-header">
+                    <span class="card-title">Botón Primario — Formulario SAT</span>
+                    <div class="card-tags"><span class="tag wp">WordPress</span><span class="tag css">CSS</span></div>
+                </div>
+                <div class="card-preview">
+                    <button style="padding:13px 48px;background:var(--sat-blue);color:white;border:none;border-radius:6px;font-size:15px;font-weight:600;cursor:pointer;font-family:var(--font-body);transition:background 0.2s;" onmouseover="this.style.background='#00509e'" onmouseout="this.style.background='var(--sat-blue)'">Enviar</button>
+                </div>
+                <div class="card-code">
+                    <button class="card-code-toggle" onclick="toggleCode(this)">
+                        <span>Ver código CSS</span><span class="arrow">▼</span>
+                    </button>
+                    <div class="code-block" id="code-btn-primary">
+                        <button class="copy-btn" onclick="copyCode('code-btn-primary')">Copiar</button>
+<pre>.sigma-btn {
+    width: 100%;
+    padding: 14px;
+    background: #003876;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+.sigma-btn:hover { background: #00509e; }
+.sigma-btn:active { transform: scale(0.98); }</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================
+             FORMULARIO CHAT
+             ===================================== -->
+        <section class="section" id="formulario" data-keywords="formulario form chat sigma five9 nombre telefono nit correo">
+            <h2 class="section-title">Formulario de Chat</h2>
+            <p class="section-desc">Formulario de identificación para iniciar conversación en el chat SAT (Five9 / Sigma).</p>
+            <div class="component-card">
+                <div class="card-header">
+                    <span class="card-title">Formulario Sigma Chat — Versión Limpia</span>
+                    <div class="card-tags"><span class="tag wp">WordPress</span><span class="tag css">CSS</span></div>
+                </div>
+                <div class="card-preview" style="padding: 40px 24px; background: #f0f2f5;">
+                    <div class="form-preview-container">
+                        <div class="sigma-form-card-preview">
+                            <img class="sigma-logo-preview" src="https://portal.sat.gob.gt/portal/wp-content/uploads/2021/06/ISOLOGOTIPO_SAT.svg" alt="SAT" onerror="this.outerHTML='<div style=&quot;text-align:center;font-weight:700;color:var(--sat-navy);font-size:20px;margin-bottom:16px;&quot;>SAT</div>'">
+                            <p class="sigma-headline-preview">Para dar inicio a la conversación debe identificarse:</p>
+                            <div class="form-group-preview"><label>Nombre</label><input type="text" placeholder="Escriba su nombre"></div>
+                            <div class="form-group-preview"><label>Teléfono</label><input type="tel" placeholder="Escriba su teléfono"></div>
+                            <div class="form-group-preview"><label>Correo Electrónico</label><input type="email" placeholder="Escriba su correo"></div>
+                            <div class="form-group-preview"><label>NIT</label><input type="text" placeholder="Escriba su NIT"></div>
+                            <div class="form-group-preview">
+                                <label>Tipo de Consulta</label>
+                                <select>
+                                    <option disabled selected>Seleccione Tipo de Consulta</option>
+                                    <option>Aduanas</option>
+                                    <option>Herramientas Electrónicas</option>
+                                    <option>Orientación Tributaria</option>
+                                    <option>Requisitos de Gestiones</option>
+                                </select>
+                            </div>
+                            <button class="btn-preview">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-code">
+                    <button class="card-code-toggle" onclick="toggleCode(this)">
+                        <span>Ver código HTML + CSS completo</span><span class="arrow">▼</span>
+                    </button>
+                    <div class="code-block" id="code-form">
+                        <button class="copy-btn" onclick="copyCode('code-form')">Copiar</button>
+<pre>&lt;style&gt;
+  .sigma-form-container { display: flex; justify-content: center; padding: 20px; }
+  .sigma-form-card {
+    background: white; border-radius: 16px; max-width: 500px; width: 100%;
+    padding: 36px; box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+  .sigma-logo { display: block; margin: 0 auto 20px; max-width: 200px; height: auto; }
+  .sigma-headline { text-align: center; color: #2d3748; font-size: 16px; margin-bottom: 24px; font-weight: 600; }
+  .sigma-form-group { margin-bottom: 16px; }
+  .sigma-label { display: block; font-size: 13px; font-weight: 600; color: #4a5568; margin-bottom: 6px; }
+  .sigma-input, .sigma-input-select {
+    width: 100%; padding: 11px 14px; border: 2px solid #e2e8f0; border-radius: 6px;
+    font-size: 14px; transition: border-color 0.2s; font-family: 'Segoe UI', sans-serif;
+  }
+  .sigma-input:focus, .sigma-input-select:focus { outline: none; border-color: #003876; }
+  .sigma-btn {
+    width: 100%; padding: 14px; background: #003876; color: white; border: none;
+    border-radius: 6px; font-size: 16px; font-weight: 600; cursor: pointer;
+    transition: all 0.3s ease; margin-top: 8px;
+  }
+  .sigma-btn:hover { background: #00509e; }
+  .sigma-footer { text-align: center; margin: 16px 0; font-size: 13px; }
+  .sigma-footer a { color: #003876; text-decoration: none; font-weight: 600; }
+&lt;/style&gt;
+
+&lt;div class="sigma-form-container"&gt;
+  &lt;div class="sigma-form-card"&gt;
+    &lt;form id="sigma-chat" onsubmit="event.preventDefault();SigmaChat.initChat()"&gt;
+      &lt;img class="sigma-logo" src="https://portal.sat.gob.gt/portal/wp-content/uploads/2021/06/ISOLOGOTIPO_SAT.svg" alt="SAT"&gt;
+      &lt;p class="sigma-headline"&gt;Para dar inicio a la conversación debe identificarse:&lt;/p&gt;
+      &lt;div class="sigma-form-group"&gt;
+        &lt;label class="sigma-label"&gt;Nombre&lt;/label&gt;
+        &lt;input class="sigma-input" type="text" name="firstName" required placeholder="Escriba su nombre"&gt;
+      &lt;/div&gt;
+      &lt;div class="sigma-form-group"&gt;
+        &lt;label class="sigma-label"&gt;Teléfono&lt;/label&gt;
+        &lt;input class="sigma-input" type="tel" name="number1" required placeholder="Escriba su teléfono" pattern="[0-9]{8}"&gt;
+      &lt;/div&gt;
+      &lt;div class="sigma-form-group"&gt;
+        &lt;label class="sigma-label"&gt;Correo Electrónico&lt;/label&gt;
+        &lt;input class="sigma-input" type="email" name="email" required placeholder="Escriba su correo"&gt;
+      &lt;/div&gt;
+      &lt;div class="sigma-form-group"&gt;
+        &lt;label class="sigma-label"&gt;NIT&lt;/label&gt;
+        &lt;input class="sigma-input" type="text" name="NIT" placeholder="Escriba su NIT"&gt;
+      &lt;/div&gt;
+      &lt;div class="sigma-form-group"&gt;
+        &lt;label class="sigma-label"&gt;Tipo de Consulta&lt;/label&gt;
+        &lt;select class="sigma-input-select" name="Question" required&gt;
+          &lt;option value="" disabled selected&gt;Seleccione Tipo de Consulta&lt;/option&gt;
+          &lt;option value="Aduanas"&gt;Aduanas&lt;/option&gt;
+          &lt;option value="Herramientas Electrónicas"&gt;Herramientas Electrónicas&lt;/option&gt;
+          &lt;option value="Orientación Tributaria"&gt;Orientación Tributaria&lt;/option&gt;
+          &lt;option value="Requisitos de Gestiones"&gt;Requisitos de Gestiones&lt;/option&gt;
+        &lt;/select&gt;
+      &lt;/div&gt;
+      &lt;div class="sigma-footer"&gt;
+        &lt;a href="https://portal.sat.gob.gt/portal/politica-y-aceptacion-de-uso-chat/" target="_blank"&gt;Política y Aceptación de uso Chat&lt;/a&gt;
+      &lt;/div&gt;
+      &lt;button class="sigma-btn" type="submit"&gt;Enviar&lt;/button&gt;
+    &lt;/form&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================
+             TABLAS
+             ===================================== -->
+        <section class="section" id="tablas" data-keywords="tabla table formularios vigentes css responsive">
+            <h2 class="section-title">Tablas</h2>
+            <p class="section-desc">Estilos de tabla para listado de formularios vigentes/no vigentes del portal SAT.</p>
+            <div class="component-card">
+                <div class="card-header">
+                    <span class="card-title">Tabla Formularios Vigentes</span>
+                    <div class="card-tags"><span class="tag wp">WordPress</span><span class="tag css">CSS</span></div>
+                </div>
+                <div class="card-preview" style="padding:20px;">
+                    <div class="table-preview">
+                        <table>
+                            <thead>
+                                <tr><th>Formulario</th><th>Descripción</th><th>PDF</th><th>Excel</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>SAT-0014</td><td style="text-align:left;padding-left:16px;">Declaración Jurada Anual ISR</td><td><span class="dl-icon">📄</span></td><td><span class="dl-icon">📊</span></td></tr>
+                                <tr><td>SAT-0085</td><td style="text-align:left;padding-left:16px;">Formulario de IVA General</td><td><span class="dl-icon">📄</span></td><td><span class="dl-icon">📊</span></td></tr>
+                                <tr><td>SAT-2237</td><td style="text-align:left;padding-left:16px;">Declaración Mensual Retenciones</td><td><span class="dl-icon">📄</span></td><td><span class="dl-icon">📊</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-code">
+                    <button class="card-code-toggle" onclick="toggleCode(this)">
+                        <span>Ver código CSS</span><span class="arrow">▼</span>
+                    </button>
+                    <div class="code-block" id="code-table">
+                        <button class="copy-btn" onclick="copyCode('code-table')">Copiar</button>
+<pre>#FormulariosVigentes,
+#FormulariosVigentesAnexo,
+#FormulariosNoVigentes,
+#FormulariosNoVigentesAnexo {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    background-color: #ffffff !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+/* Encabezados */
+#FormulariosVigentes th,
+#FormulariosVigentesAnexo th,
+#FormulariosNoVigentes th,
+#FormulariosNoVigentesAnexo th {
+    background-color: #093758 !important;
+    color: #ffffff !important;
+    padding: 15px 8px !important;
+    text-align: center !important;
+    font-weight: bold;
+    border: 1px solid #093758 !important;
+}
+
+/* Celdas */
+#FormulariosVigentes td,
+#FormulariosVigentesAnexo td,
+#FormulariosNoVigentes td,
+#FormulariosNoVigentesAnexo td {
+    padding: 12px 8px !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+    border: 1px solid #e0e0e0 !important;
+}
+
+/* Primera columna alineada a la izquierda */
+#FormulariosVigentes td:first-child,
+#FormulariosNoVigentes td:first-child {
+    text-align: left !important;
+    padding-left: 15px !important;
+}
+
+/* Imágenes */
+#FormulariosVigentes img,
+#FormulariosNoVigentes img {
+    max-width: 35px !important;
+    height: auto !important;
+    border-radius: 4px;
+    transition: transform 0.2s ease;
+}
+
+/* Filas alternas */
+tbody tr:nth-child(even) { background-color: #f8f9fa; }
+tbody tr:nth-child(odd)  { background-color: #ffffff; }
+
+/* Hover */
+tbody tr:hover { background-color: #eef3ff !important; }
+
+a:hover img { transform: scale(1.05); }</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================
+             EMAIL TEMPLATE
+             ===================================== -->
+        <section class="section" id="email" data-keywords="email correo notificacion correspondencia power automate plantilla template">
+            <h2 class="section-title">Email de Notificación</h2>
+            <p class="section-desc">Plantilla HTML para correos de Power Automate — notificación de correspondencia registrada.</p>
+            <div class="component-card">
+                <div class="card-header">
+                    <span class="card-title">Notificación Correspondencia</span>
+                    <div class="card-tags"><span class="tag pa">Power Automate</span><span class="tag email">Email</span></div>
+                </div>
+                <div class="card-preview" style="padding:32px 24px;background:#eef1f5;">
+                    <div class="email-preview">
+                        <div class="email-topbar">
+                            <span class="email-dot" style="background:#ef4444"></span>
+                            <span class="email-dot" style="background:#f59e0b"></span>
+                            <span class="email-dot" style="background:#22c55e"></span>
+                            <span style="margin-left:8px;font-size:12px;color:#64748b;">Nuevo Documento en Correspondencia</span>
+                        </div>
+                        <div class="email-body-preview">
+                            <p style="margin-bottom:16px;">Hola, se ha registrado el documento <strong>OF-2026-001</strong> en Correspondencia de Gerencia Operativa.</p>
+                            <div class="email-field"><strong>Título:</strong><br>Informe Mensual Enero 2026</div>
+                            <div class="email-field"><strong>Fecha de Ingreso:</strong><br>lunes 5 de enero de 2026</div>
+                            <div class="email-field"><strong>Tipo:</strong><br>Oficio</div>
+                            <div class="email-field"><strong>Estado:</strong><br><span class="status-badge" style="background:#92D050;color:#000;font-size:11px;">Asignado</span></div>
+                            <div style="text-align:center;">
+                                <a href="#" class="email-btn-preview" style="font-size:14px;padding:12px 32px;" onclick="event.preventDefault()">📄 Ver Documento</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-code">
+                    <button class="card-code-toggle" onclick="toggleCode(this)">
+                        <span>Ver plantilla HTML completa</span><span class="arrow">▼</span>
+                    </button>
+                    <div class="code-block" id="code-email">
+                        <button class="copy-btn" onclick="copyCode('code-email')">Copiar</button>
+<pre>&lt;p&gt;@{concat('Hola, se ha registrado el documento &lt;strong&gt;',
+  outputs('Obtener_propiedades_del_archivo')?['body/Title'],
+  '&lt;/strong&gt; en Correspondencia de Gerencia Operativa.')}&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Título:&lt;/strong&gt;&lt;br&gt;
+@{outputs('Obtener_propiedades_del_archivo')?['body/Title']}&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Fecha de Ingreso:&lt;/strong&gt;&lt;br&gt;
+@{formatDateTime(triggerBody()?['Fecha_x0020_de_x0020_ingreso_x003a_'],
+  'dddd d ''de'' MMMM ''de'' yyyy', 'es-ES')}&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Tipo de documento:&lt;/strong&gt;&lt;br&gt;
+@{outputs('Obtener_propiedades_del_archivo')?['body/Clase/Value']}&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Asignado:&lt;/strong&gt;&lt;br&gt;
+@{outputs('Obtener_propiedades_del_archivo')?['body/Asignado_x0020_a_x003a_0/DisplayName']}&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Instrucción:&lt;/strong&gt;&lt;br&gt;
+@{triggerBody()?['Instrucci_x00f3_n_x003a_']}&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Estado:&lt;/strong&gt;&lt;br&gt;
+@{concat('&lt;span style="display: inline-block; padding: 5px 15px; border-radius: 15px; font-weight: bold; ',
+  if(equals(triggerBody()?['Estado_x003a_/Value'], 'Asignado'),
+    'background-color: #92D050; color: #000000;',
+  if(equals(triggerBody()?['Estado_x003a_/Value'], 'Archivado'),
+    'background-color: #0070C0; color: #FFFFFF;',
+    'background-color: #CCCCCC; color: #000000;')),
+  '"&gt;', triggerBody()?['Estado_x003a_/Value'], '&lt;/span&gt;')}&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Plazo de respuesta:&lt;/strong&gt;&lt;br&gt;
+@{formatDateTime(outputs('Obtener_propiedades_del_archivo')?['body/Plazo_x0020_de_x0020_Respuesta_x003a_'],
+  'dddd d ''de'' MMMM ''de'' yyyy', 'es-ES')}&lt;/p&gt;
+
+@{concat('&lt;p style="text-align: center; margin: 20px 0;"&gt;&lt;a href="',
+  outputs('Obtener_propiedades_del_archivo')?['body/{Link}'],
+  '" style="background-color: #0078d4; color: white; padding: 14px 36px; text-decoration: none; border-radius: 5px; display: inline-block; font-weight: bold; font-size: 16px;"&gt;📄 Ver Documento&lt;/a&gt;&lt;/p&gt;')}</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================
+             CHATBOT RITA
+             ===================================== -->
+        <section class="section" id="chatbot" data-keywords="chatbot rita bot dialogflow asistente virtual">
+            <h2 class="section-title">Chatbot RITA</h2>
+            <p class="section-desc">Interfaz del asistente virtual RITA integrado en el portal SAT (Dialogflow ES).</p>
+            <div class="component-card">
+                <div class="card-header">
+                    <span class="card-title">Widget RITA — Preview</span>
+                    <div class="card-tags"><span class="tag wp">WordPress</span><span class="tag">Dialogflow</span></div>
+                </div>
+                <div class="card-preview" style="padding:40px 24px;background:#f0f2f5;">
+                    <div class="widget-chat-preview">
+                        <div class="widget-header">
+                            <img src="https://s3bucket-satgt-pro-chatbot-ac-portal-sat.s3.amazonaws.com/v3.0.3/assets/satgt-rita-icon-v2-43x43.png" alt="RITA" onerror="this.outerHTML='<div style=&quot;width:32px;height:32px;background:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;&quot;>🤖</div>'">
+                            <span class="widget-header-text">RITA — Asistente Virtual</span>
+                        </div>
+                        <div class="widget-body">
+                            <div class="widget-msg">¡Hola, mi nombre es RITA! Por favor escribe tu pregunta o selecciona alguno de los temas siguientes:</div>
+                            <div class="widget-chips">
+                                <span class="widget-chip">Servicios en línea</span>
+                                <span class="widget-chip">¿Estoy omiso?</span>
+                                <span class="widget-chip">RTU Digital</span>
+                                <span class="widget-chip">Agencia Virtual</span>
+                                <span class="widget-chip">Vehículos</span>
+                                <span class="widget-chip">Planilla del IVA</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================
+             FIVE9 WIDGET
+             ===================================== -->
+        <section class="section" id="five9" data-keywords="five9 chat widget script configuracion">
+            <h2 class="section-title">Five9 Chat Widget</h2>
+            <p class="section-desc">Configuración del widget de chat Five9 para el portal SAT.</p>
+            <div class="component-card">
+                <div class="card-header">
+                    <span class="card-title">Five9 SocialWidget — Config</span>
+                    <div class="card-tags"><span class="tag wp">WordPress</span><span class="tag">JavaScript</span></div>
+                </div>
+                <div class="card-code">
+                    <button class="card-code-toggle open" onclick="toggleCode(this)">
+                        <span>Ver código JS</span><span class="arrow">▼</span>
+                    </button>
+                    <div class="code-block show" id="code-five9">
+                        <button class="copy-btn" onclick="copyCode('code-five9')">Copiar</button>
+<pre>&lt;script src="https://app.five9.com/consoles/SocialWidget/five9-social-widget.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+var options = {
+    "rootUrl": "https://app.five9.com/consoles/",
+    "type": "chat",
+    "title": "Portal SAT",
+    "tenant": "CX Analytika-Nuveto SAT",
+    "profiles": "ChatWeb",
+    "showProfiles": false,
+    "autostart": true,
+    "profileLabel": "Portal SAT",
+    "theme": "default-theme.css",
+    "logo": "https://portal.sat.gob.gt/portal/wp-content/uploads/2021/06/logo_sat_blanco-1.png",
+    "surveyOptions": {
+        "showComment": true,
+        "requireComment": false
+    },
+    "fields": {
+        "name":      { "value": "", "show": true,  "label": "Nombre" },
+        "email":     { "value": "", "show": true,  "label": "Correo" },
+        "NIT":       { "value": "", "show": true,  "label": "NIT", "required": true },
+        "UserLocale":{ "value": "es", "show": false }
+    },
+    "playSoundOnMessage": true,
+    "allowCustomerToControlSoundPlay": false,
+    "showEmailButton": true,
+    "hideDuringAfterHours": false,
+    "useBusinessHours": false,
+    "showPrintButton": false,
+    "allowUsabilityMenu": false,
+    "enableCallback": false,
+    "callbackList": "",
+    "allowRequestLiveAgent": false
+};
+Five9SocialWidget.addWidget(options);
+&lt;/script&gt;</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================
+             ANIMACIONES
+             ===================================== -->
+        <section class="section" id="animaciones" data-keywords="animacion animation zoom pulse css keyframes">
+            <h2 class="section-title">Animaciones CSS</h2>
+            <p class="section-desc">Animaciones usadas para llamar la atención sobre elementos del portal.</p>
+            <div class="component-card">
+                <div class="card-header">
+                    <span class="card-title">Zoom In-Out Loop</span>
+                    <div class="card-tags"><span class="tag css">CSS</span><span class="tag wp">WordPress</span></div>
+                </div>
+                <div class="card-preview">
+                    <div class="anim-preview">
+                        <div class="zoom-animation-demo" style="background:var(--sat-blue);color:white;padding:16px 28px;border-radius:10px;font-weight:700;font-size:15px;">💬 Chat</div>
+                        <div class="pulse-demo">RITA</div>
+                    </div>
+                </div>
+                <div class="card-code">
+                    <button class="card-code-toggle" onclick="toggleCode(this)">
+                        <span>Ver código CSS</span><span class="arrow">▼</span>
+                    </button>
+                    <div class="code-block" id="code-anim">
+                        <button class="copy-btn" onclick="copyCode('code-anim')">Copiar</button>
+<pre>/* Zoom in-out loop — ideal para botones CTA */
+.zoom-animation {
+    animation: zoom-in-out 2s ease-in-out infinite;
+    display: inline-block;
+}
+
+@keyframes zoom-in-out {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.1); }
+}
+
+/* Velocidad: cambiar "2s" | Tamaño: cambiar "1.1" */</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================
+             IFRAMES WORDPRESS
+             ===================================== -->
+        <section class="section" id="iframes" data-keywords="iframe wordpress incrustar embed full width chat">
+            <h2 class="section-title">Iframes WordPress</h2>
+            <p class="section-desc">Patrones para incrustar contenido en páginas de WordPress mediante iframes.</p>
+            <div class="component-card">
+                <div class="card-header">
+                    <span class="card-title">Iframe Full-Width para Chat</span>
+                    <div class="card-tags"><span class="tag wp">WordPress</span></div>
+                </div>
+                <div class="card-preview">
+                    <div class="iframe-preview">
+                        <div class="icon-lg">🖼️</div>
+                        <div>iframe — Chat SAT Full Width</div>
+                        <div style="font-size:12px;margin-top:4px;color:#94a3b8;">700px height &bull; 100% width &bull; no border</div>
+                    </div>
+                </div>
+                <div class="card-code">
+                    <button class="card-code-toggle" onclick="toggleCode(this)">
+                        <span>Ver código HTML</span><span class="arrow">▼</span>
+                    </button>
+                    <div class="code-block" id="code-iframe">
+                        <button class="copy-btn" onclick="copyCode('code-iframe')">Copiar</button>
+<pre>&lt;!-- Iframe básico --&gt;
+&lt;iframe 
+    width="100%" 
+    height="700px"
+    src="https://portal.sat.gob.gt/portal/soporte-chat/"
+    frameborder="0" 
+    allowfullscreen
+    style="border: none; min-height: 600px;"&gt;
+&lt;/iframe&gt;
+
+&lt;!-- Iframe full-width con contenedor --&gt;
+&lt;div style="width:100%; max-width:100%; height:700px; border:0; overflow:hidden; margin:0; padding:0; box-sizing:border-box;"&gt;
+  &lt;iframe
+    src="URL_AQUI"
+    width="100%"
+    height="100%"
+    frameborder="0"
+    allow="microphone; camera"
+    loading="lazy"
+    style="display:block; border:none;"&gt;
+  &lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;!-- CSS adicional si no ocupa el ancho completo --&gt;
+&lt;style&gt;
+.widget iframe {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.widget {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+&lt;/style&gt;</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================
+             LINKS BLANCOS
+             ===================================== -->
+        <section class="section" id="links" data-keywords="links blancos white enlace dark background">
+            <h2 class="section-title">Links Blancos</h2>
+            <p class="section-desc">Patrón para enlaces con texto blanco sobre fondos oscuros del portal.</p>
+            <div class="component-card">
+                <div class="card-header">
+                    <span class="card-title">Links sobre fondo oscuro</span>
+                    <div class="card-tags"><span class="tag wp">WordPress</span><span class="tag css">CSS</span></div>
+                </div>
+                <div class="card-preview dark" style="padding:28px 32px;">
+                    <div class="link-row-dark">
+                        <a href="#">- Chat en línea</a>
+                        <a href="#">- Consultas Tributarias y Aduaneras</a>
+                        <a href="#">- Consultas Legales</a>
+                        <a href="#">- Solicitud de Información Pública</a>
+                    </div>
+                </div>
+                <div class="card-code">
+                    <button class="card-code-toggle" onclick="toggleCode(this)">
+                        <span>Ver código HTML</span><span class="arrow">▼</span>
+                    </button>
+                    <div class="code-block" id="code-links">
+                        <button class="copy-btn" onclick="copyCode('code-links')">Copiar</button>
+<pre>&lt;a href="https://portal.sat.gob.gt/portal/soporte-chat/"
+   style="text-decoration:none; color:white !important;"&gt;
+   - Chat en línea
+&lt;/a&gt;&lt;br&gt;
+
+&lt;a href="https://portal.sat.gob.gt/portal/consultas-tributarias-y-aduaneras/"
+   style="text-decoration:none; color:white !important;"&gt;
+   - Consultas Tributarias y Aduaneras
+&lt;/a&gt;&lt;br&gt;
+
+&lt;a href="https://portal.sat.gob.gt/portal/contacto/consultas-legales/"
+   style="text-decoration:none; color:white !important;"&gt;
+   - Consultas Legales
+&lt;/a&gt;&lt;br&gt;
+
+&lt;a href="https://portal.sat.gob.gt/portal/libre-acceso-la-informacion-publica/"
+   style="text-decoration:none; color:white !important;"&gt;
+   - Solicitud de Información Pública
+&lt;/a&gt;
+
+&lt;!-- CSS global alternativo --&gt;
+&lt;style&gt;
+a { color: white !important; text-decoration: none; }
+a:visited, a:hover, a:active { color: white !important; }
+&lt;/style&gt;</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- MOBILE TOGGLE -->
+<button class="mobile-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+
+<script>
+    // ===== TOGGLE CODE BLOCKS =====
+    function toggleCode(btn) {
+        const block = btn.nextElementSibling;
+        btn.classList.toggle('open');
+        block.classList.toggle('show');
+    }
+
+    // ===== COPY CODE =====
+    function copyCode(blockId) {
+        const block = document.getElementById(blockId);
+        const pre = block.querySelector('pre');
+        const text = pre.textContent;
+        navigator.clipboard.writeText(text).then(() => {
+            const btn = block.querySelector('.copy-btn');
+            btn.textContent = '✓ Copiado';
+            btn.classList.add('copied');
+            showToast('Código copiado al portapapeles');
+            setTimeout(() => {
+                btn.textContent = 'Copiar';
+                btn.classList.remove('copied');
+            }, 2000);
+        });
+    }
+
+    // ===== COPY TO CLIPBOARD (colors) =====
+    function copyToClipboard(text, el) {
+        navigator.clipboard.writeText(text).then(() => {
+            showToast(`Color ${text} copiado`);
+        });
+    }
+
+    // ===== TOAST =====
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 2200);
+    }
+
+    // ===== NAV SCROLL =====
+    function scrollToSection(id) {
+        document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        document.querySelector(`.nav-link[data-target="${id}"]`).classList.add('active');
+        // Close mobile sidebar
+        document.getElementById('sidebar').classList.remove('open');
+    }
+
+    // ===== SEARCH / FILTER =====
+    function filterComponents() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        document.querySelectorAll('.section').forEach(section => {
+            const keywords = (section.dataset.keywords || '') + ' ' + section.textContent.toLowerCase();
+            section.style.display = keywords.includes(query) ? '' : 'none';
+        });
+    }
+
+    // ===== SCROLL SPY =====
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.id;
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                const link = document.querySelector(`.nav-link[data-target="${id}"]`);
+                if (link) link.classList.add('active');
+            }
+        });
+    }, { threshold: 0.2, rootMargin: '-20% 0px -60% 0px' });
+
+    document.querySelectorAll('.section').forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
