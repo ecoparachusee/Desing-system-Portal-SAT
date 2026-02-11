@@ -1,0 +1,131 @@
+.five9-accept-btn,
+.five9-action-btn,
+.five9-aux-btn,
+.five9-confirm-btn,
+.five9-cancel-btn {
+    background: #0069a3 !important;
+    color: #fff !important;
+
+
+}
+
+.five9-chat-button {
+    background: #0069a3 !important;
+    color: #fff !important;
+    font-size: 24px !important;
+
+}
+
+.five9-action-btn,
+.five9-aux-btn {
+
+    background: #0069a3 !important;
+    color: #fff !important;
+
+}
+
+.five9-chat-button:after {
+
+    content: 'Iniciar Chat' !important;
+
+}
+
+.fill-logo {
+    text-align: center;
+    background: #17527F !important;
+}
+
+
+.led-banner {
+    width: 100%;
+    overflow: hidden;
+    background: #17527F;
+    border-top: 2px solid #17527F;
+    border-bottom: 2px solid #17527F;
+    padding: 0;
+    position: relative;
+}
+
+/* Viñeta lateral para efecto de profundidad */
+.led-banner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+            #17527F 0%,
+            transparent 4%,
+            transparent 96%,
+            #17527F 100%);
+    pointer-events: none;
+    z-index: 3;
+}
+
+.led-track {
+    display: flex;
+    width: max-content;
+    animation: scroll-led 22s linear infinite;
+}
+
+.led-track:hover {
+    animation-play-state: paused;
+}
+
+.led-text {
+    white-space: nowrap;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 1.5px;
+    padding: 14px 60px;
+    color: #ffffff;
+    text-shadow:
+        0 0 4px rgba(255, 255, 255, 0.5),
+        0 0 12px rgba(255, 255, 255, 0.25),
+        0 0 24px rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.led-text .icon {
+    display: inline-block;
+    margin-right: 8px;
+    animation: pulse-icon 1.4s ease-in-out infinite;
+}
+
+@keyframes scroll-led {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes pulse-icon {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+}
+
+
+
+
+</head><body><div class="led-banner" role="marquee" aria-label="Aviso importante de la SAT"><div class="led-track"><span class="led-text"><span class="icon">⚠️</span>No te dejes engañar ! ! La SAT no llama para confirmar datos por teléfono y no envía links para ingresar a páginas. Estas gestiones se realizan desde la Agencia Virtual o de manera presencial en Agencias u Oficinas Tributarias. &nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+</span><span class="led-text"><span class="icon">⚠️</span>No te dejes engañar ! ! La SAT no llama para confirmar datos por teléfono y no envía links para ingresar a páginas. Estas gestiones se realizan desde la Agencia Virtual o de manera presencial en Agencias u Oficinas Tributarias. &nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+</span></div></div></body></html>

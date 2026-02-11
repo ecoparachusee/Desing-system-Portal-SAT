@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tablas — SAT GT Design System</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --sat-navy: #093758;
@@ -16,15 +19,24 @@
             --sat-text: #1a1a2e;
             --sat-text-muted: #64748b;
             --sat-border: #e2e8f0;
-            --sat-shadow: 0 1px 3px rgba(9,55,88,0.08), 0 4px 16px rgba(9,55,88,0.04);
-            --sat-shadow-lg: 0 4px 24px rgba(9,55,88,0.12);
+            --sat-shadow: 0 1px 3px rgba(9, 55, 88, 0.08), 0 4px 16px rgba(9, 55, 88, 0.04);
+            --sat-shadow-lg: 0 4px 24px rgba(9, 55, 88, 0.12);
             --sat-radius: 10px;
             --font-body: 'DM Sans', -apple-system, sans-serif;
             --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
         }
 
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
             font-family: var(--font-body);
@@ -54,7 +66,7 @@
         }
 
         .topbar-back {
-            color: rgba(255,255,255,0.6);
+            color: rgba(255, 255, 255, 0.6);
             text-decoration: none;
             font-size: 13px;
             font-weight: 500;
@@ -64,12 +76,14 @@
             transition: color 0.15s;
         }
 
-        .topbar-back:hover { color: white; }
+        .topbar-back:hover {
+            color: white;
+        }
 
         .topbar-divider {
             width: 1px;
             height: 20px;
-            background: rgba(255,255,255,0.15);
+            background: rgba(255, 255, 255, 0.15);
         }
 
         .topbar-title {
@@ -82,8 +96,8 @@
             font-weight: 600;
             padding: 3px 10px;
             border-radius: 20px;
-            background: rgba(255,255,255,0.12);
-            color: rgba(255,255,255,0.7);
+            background: rgba(255, 255, 255, 0.12);
+            color: rgba(255, 255, 255, 0.7);
             letter-spacing: 0.05em;
             text-transform: uppercase;
         }
@@ -95,9 +109,15 @@
             padding: 40px 32px 80px;
         }
 
-        @media (max-width: 600px) { .content { padding: 24px 16px 60px; } }
+        @media (max-width: 600px) {
+            .content {
+                padding: 24px 16px 60px;
+            }
+        }
 
-        .page-header { margin-bottom: 40px; }
+        .page-header {
+            margin-bottom: 40px;
+        }
 
         .page-header h1 {
             font-size: 30px;
@@ -123,7 +143,9 @@
             box-shadow: var(--sat-shadow);
         }
 
-        .component-card:hover { box-shadow: var(--sat-shadow-lg); }
+        .component-card:hover {
+            box-shadow: var(--sat-shadow-lg);
+        }
 
         .card-header {
             display: flex;
@@ -134,9 +156,15 @@
             background: #fafbfc;
         }
 
-        .card-title { font-size: 14px; font-weight: 600; }
+        .card-title {
+            font-size: 14px;
+            font-weight: 600;
+        }
 
-        .card-tags { display: flex; gap: 6px; }
+        .card-tags {
+            display: flex;
+            gap: 6px;
+        }
 
         .tag {
             font-size: 11px;
@@ -145,16 +173,29 @@
             border-radius: 20px;
         }
 
-        .tag.wp { background: #e0f2fe; color: #0369a1; }
-        .tag.css { background: #ede9fe; color: #6d28d9; }
-        .tag.responsive { background: #dcfce7; color: #166534; }
+        .tag.wp {
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+
+        .tag.css {
+            background: #ede9fe;
+            color: #6d28d9;
+        }
+
+        .tag.responsive {
+            background: #dcfce7;
+            color: #166534;
+        }
 
         .card-preview {
             padding: 24px;
             background: #f8f9fb;
         }
 
-        .card-code { border-top: 1px solid var(--sat-border); }
+        .card-code {
+            border-top: 1px solid var(--sat-border);
+        }
 
         .card-code-toggle {
             display: flex;
@@ -172,16 +213,27 @@
             transition: background 0.15s;
         }
 
-        .card-code-toggle:hover { background: #f0f2f5; }
-        .card-code-toggle .arrow { transition: transform 0.2s; font-size: 10px; }
-        .card-code-toggle.open .arrow { transform: rotate(180deg); }
+        .card-code-toggle:hover {
+            background: #f0f2f5;
+        }
+
+        .card-code-toggle .arrow {
+            transition: transform 0.2s;
+            font-size: 10px;
+        }
+
+        .card-code-toggle.open .arrow {
+            transform: rotate(180deg);
+        }
 
         .code-block {
             display: none;
             position: relative;
         }
 
-        .code-block.show { display: block; }
+        .code-block.show {
+            display: block;
+        }
 
         .code-block pre {
             margin: 0;
@@ -201,9 +253,9 @@
             right: 12px;
             padding: 6px 14px;
             border-radius: 6px;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             color: #94a3b8;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             font-family: var(--font-body);
             font-size: 12px;
             font-weight: 500;
@@ -212,45 +264,129 @@
             z-index: 5;
         }
 
-        .copy-btn:hover { background: rgba(255,255,255,0.18); color: #fff; }
-        .copy-btn.copied { background: #107C10; color: white; border-color: #107C10; }
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.18);
+            color: #fff;
+        }
+
+        .copy-btn.copied {
+            background: #107C10;
+            color: white;
+            border-color: #107C10;
+        }
 
         /* ===== TABLE PREVIEWS ===== */
-        .table-preview { width: 100%; overflow-x: auto; }
+        .table-preview {
+            width: 100%;
+            overflow-x: auto;
+        }
 
-        .table-preview table {
+        /* ===== SAT TABLE UTILITIES (Bootstrap-like) ===== */
+        .table-sat {
             width: 100%;
             border-collapse: collapse;
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             overflow: hidden;
-            font-size: 13.5px;
+            margin-bottom: 1rem;
+            font-size: 14px;
         }
 
-        .table-preview th {
-            background: var(--sat-navy);
-            color: white;
-            padding: 13px 12px;
+        .table-sat th {
+            background-color: var(--sat-navy);
+            color: #ffffff;
+            padding: 15px 12px;
             text-align: center;
             font-weight: 600;
-            font-size: 13px;
-        }
-
-        .table-preview td {
-            padding: 11px 12px;
-            text-align: center;
-            border-bottom: 1px solid #e8e8e8;
+            border: 1px solid var(--sat-navy);
             vertical-align: middle;
         }
 
-        .table-preview td:first-child {
+        .table-sat td {
+            padding: 12px 12px;
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid #e0e0e0;
+        }
+
+        /* Utility: First column left */
+        .table-sat td:first-child {
             text-align: left;
             padding-left: 16px;
             font-weight: 500;
         }
 
-        .table-preview tbody tr:nth-child(even) { background: #f8f9fa; }
-        .table-preview tbody tr:nth-child(odd) { background: white; }
-        .table-preview tbody tr:hover { background: #eef3ff; }
+        /* Variant: Striped */
+        .table-sat-striped tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .table-sat-striped tbody tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        /* Variant: Hover */
+        .table-sat-hover tbody tr:hover {
+            background-color: #eef3ff;
+        }
+
+        /* Variant: Anexos (2nd col left) */
+        .table-sat-anexo td:nth-child(2) {
+            text-align: left;
+            padding-left: 16px;
+        }
+
+        /* Variant: Gestion (2 cols fixed width) */
+        .table-sat-gestion td:first-child {
+            width: 25%;
+        }
+
+        .table-sat-gestion td:nth-child(2) {
+            width: 75%;
+            text-align: left;
+            padding-left: 16px;
+        }
+
+        /* Variant: Responsive Cards */
+        @media (max-width: 768px) {
+            .table-sat-responsive {
+                box-shadow: none;
+            }
+
+            .table-sat-responsive thead {
+                display: none;
+            }
+
+            .table-sat-responsive tbody tr {
+                display: block;
+                margin-bottom: 12px;
+                border: 1px solid #e0e0e0;
+                border-radius: 10px;
+                padding: 14px;
+                background: white;
+                box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+            }
+
+            .table-sat-responsive td {
+                display: block;
+                text-align: left;
+                padding: 6px 0;
+                border: none;
+            }
+
+            .table-sat-responsive td:first-child {
+                font-weight: 700;
+                color: var(--sat-navy);
+                font-size: 15px;
+                padding-left: 0;
+                margin-bottom: 4px;
+            }
+
+            .table-sat-responsive td img {
+                max-width: 28px;
+            }
+        }
 
         .dl-icon {
             display: inline-block;
@@ -265,7 +401,9 @@
             cursor: pointer;
         }
 
-        .dl-icon:hover { transform: scale(1.15); }
+        .dl-icon:hover {
+            transform: scale(1.15);
+        }
 
         /* Mobile table */
         .table-mobile-preview {
@@ -279,7 +417,7 @@
             border-radius: 10px;
             border: 1px solid #e2e8f0;
             padding: 16px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
         }
 
         .table-card-item .item-code {
@@ -315,14 +453,11 @@
             background: #dbeafe;
         }
 
-        /* 2-col table */
-        .table-2col td:nth-child(2) {
-            text-align: left !important;
-            padding-left: 16px !important;
-        }
-
         /* ===== SECTION TITLE ===== */
-        .section { margin-bottom: 48px; scroll-margin-top: 80px; }
+        .section {
+            margin-bottom: 48px;
+            scroll-margin-top: 80px;
+        }
 
         .section-title {
             font-size: 20px;
@@ -361,7 +496,7 @@
             border-radius: 10px;
             font-size: 13.5px;
             font-weight: 500;
-            box-shadow: 0 8px 32px rgba(9,55,88,0.3);
+            box-shadow: 0 8px 32px rgba(9, 55, 88, 0.3);
             z-index: 200;
             opacity: 0;
             transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -394,81 +529,145 @@
             transition: all 0.15s;
         }
 
-        .nav-pill:hover { border-color: var(--sat-blue); color: var(--sat-blue); }
-        .nav-pill.active { background: var(--sat-navy); color: white; border-color: var(--sat-navy); }
+        .nav-pill:hover {
+            border-color: var(--sat-blue);
+            color: var(--sat-blue);
+        }
+
+        .nav-pill.active {
+            background: var(--sat-navy);
+            color: white;
+            border-color: var(--sat-navy);
+        }
     </style>
 </head>
+
 <body>
 
-<!-- ===== TOP BAR ===== -->
-<div class="topbar">
-    <div class="topbar-left">
-        <a href="index.html" class="topbar-back">← Volver al Design System</a>
-        <div class="topbar-divider"></div>
-        <span class="topbar-title">📊 Tablas</span>
-    </div>
-    <span class="topbar-badge">Componente</span>
-</div>
-
-<!-- ===== CONTENT ===== -->
-<div class="content">
-
-    <div class="page-header">
-        <h1>Tablas</h1>
-        <p>Estilos CSS para las tablas del portal SAT: formularios vigentes, no vigentes, anexos y tablas de gestión con vista desktop y mobile.</p>
+    <!-- ===== TOP BAR ===== -->
+    <div class="topbar">
+        <div class="topbar-left">
+            <a href="index.html" class="topbar-back">← Volver al Design System</a>
+            <div class="topbar-divider"></div>
+            <span class="topbar-title">📊 Tablas</span>
+        </div>
+        <span class="topbar-badge">Componente</span>
     </div>
 
-    <div class="nav-pills">
-        <a class="nav-pill active" onclick="scrollTo('formularios')">Formularios Vigentes</a>
-        <a class="nav-pill" onclick="scrollTo('anexos')">Anexos</a>
-        <a class="nav-pill" onclick="scrollTo('gestion')">Gestión (2 columnas)</a>
-        <a class="nav-pill" onclick="scrollTo('mobile')">Vista Mobile</a>
-        <a class="nav-pill" onclick="scrollTo('css-completo')">CSS Completo</a>
-    </div>
+    <!-- ===== CONTENT ===== -->
+    <div class="content">
 
-    <!-- ================================
+        <div class="page-header">
+            <h1>Tablas</h1>
+            <p>Estilos CSS para las tablas del portal SAT: formularios vigentes, no vigentes, anexos y tablas de gestión
+                con vista desktop y mobile.</p>
+        </div>
+
+        <div class="nav-pills">
+            <a class="nav-pill active" onclick="scrollToSection('formularios')">Formularios Vigentes</a>
+            <a class="nav-pill" onclick="scrollToSection('anexos')">Anexos</a>
+            <a class="nav-pill" onclick="scrollToSection('gestion')">Gestión (2 columnas)</a>
+            <a class="nav-pill" onclick="scrollToSection('mobile')">Vista Mobile</a>
+            <a class="nav-pill" onclick="scrollToSection('css-completo')">CSS Completo</a>
+        </div>
+
+        <!-- ================================
          FORMULARIOS VIGENTES
          ================================ -->
-    <section class="section" id="formularios">
-        <h2 class="section-title">Tabla Formularios Vigentes</h2>
-        <p class="section-desc">Tabla con 4 columnas: código, descripción, y enlaces de descarga PDF/Excel. Header azul navy #093758.</p>
+        <section class="section" id="formularios">
+            <h2 class="section-title">Tabla Estándar</h2>
+            <p class="section-desc">Clase base <code>.table-sat</code> con modificadores <code>.table-sat-striped</code>
+                y <code>.table-sat-hover</code>.</p>
 
-        <div class="component-card">
-            <div class="card-header">
-                <span class="card-title">#FormulariosVigentes</span>
-                <div class="card-tags">
-                    <span class="tag wp">WordPress</span>
-                    <span class="tag css">CSS</span>
+            <div class="component-card">
+                <div class="card-header">
+                    <span class="card-title">.table-sat .table-sat-striped .table-sat-hover</span>
+                    <div class="card-tags">
+                        <span class="tag wp">Utility Class</span>
+                        <span class="tag css">CSS</span>
+                    </div>
                 </div>
-            </div>
-            <div class="card-preview">
-                <div class="table-preview">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Formulario</th>
-                                <th>Descripción</th>
-                                <th>PDF</th>
-                                <th>Excel</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>SAT-0014</td><td style="text-align:left;padding-left:16px;">Declaración Jurada Anual y Mensual del ISR</td><td><span class="dl-icon">📄</span></td><td><span class="dl-icon">📊</span></td></tr>
-                            <tr><td>SAT-0085</td><td style="text-align:left;padding-left:16px;">Formulario de IVA General</td><td><span class="dl-icon">📄</span></td><td><span class="dl-icon">📊</span></td></tr>
-                            <tr><td>SAT-2000</td><td style="text-align:left;padding-left:16px;">Declaración Aduanera de Importación</td><td><span class="dl-icon">📄</span></td><td><span class="dl-icon">📊</span></td></tr>
-                            <tr><td>SAT-2157</td><td style="text-align:left;padding-left:16px;">Solicitud de Devolución de Crédito Fiscal</td><td><span class="dl-icon">📄</span></td><td><span class="dl-icon">📊</span></td></tr>
-                            <tr><td>SAT-2237</td><td style="text-align:left;padding-left:16px;">Declaración Mensual de Retenciones ISR</td><td><span class="dl-icon">📄</span></td><td><span class="dl-icon">📊</span></td></tr>
-                        </tbody>
-                    </table>
+                <div class="card-preview">
+                    <div class="table-preview">
+                        <table class="table-sat table-sat-striped table-sat-hover">
+                            <thead>
+                                <tr>
+                                    <th>Formulario</th>
+                                    <th>Descripción</th>
+                                    <th>PDF</th>
+                                    <th>Excel</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>SAT-0014</td>
+                                    <td>Declaración Jurada Anual y Mensual
+                                        del ISR</td>
+                                    <td><span class="dl-icon">📄</span></td>
+                                    <td><span class="dl-icon">📊</span></td>
+                                </tr>
+                                <tr>
+                                    <td>SAT-0085</td>
+                                    <td>Formulario de IVA General</td>
+                                    <td><span class="dl-icon">📄</span></td>
+                                    <td><span class="dl-icon">📊</span></td>
+                                </tr>
+                                <tr>
+                                    <td>SAT-2000</td>
+                                    <td>Declaración Aduanera de Importación
+                                    </td>
+                                    <td><span class="dl-icon">📄</span></td>
+                                    <td><span class="dl-icon">📊</span></td>
+                                </tr>
+                                <tr>
+                                    <td>SAT-2157</td>
+                                    <td>Solicitud de Devolución de Crédito
+                                        Fiscal</td>
+                                    <td><span class="dl-icon">📄</span></td>
+                                    <td><span class="dl-icon">📊</span></td>
+                                </tr>
+                                <tr>
+                                    <td>SAT-2237</td>
+                                    <td>Declaración Mensual de Retenciones
+                                        ISR</td>
+                                    <td><span class="dl-icon">📄</span></td>
+                                    <td><span class="dl-icon">📊</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-            <div class="card-code">
-                <button class="card-code-toggle" onclick="toggleCode(this)">
-                    <span>Ver CSS</span><span class="arrow">▼</span>
-                </button>
-                <div class="code-block" id="code-vigentes">
-                    <button class="copy-btn" onclick="copyCode('code-vigentes')">Copiar</button>
-<pre>#FormulariosVigentes {
+                <div class="card-code">
+                    <button class="card-code-toggle" onclick="toggleCode(this)">
+                        <span>Ver HTML</span><span class="arrow">▼</span>
+                    </button>
+                    <div class="code-block" id="html-vigentes">
+                        <button class="copy-btn" onclick="copyCode('html-vigentes')">Copiar</button>
+                        <pre>&lt;table class="table-sat table-sat-striped table-sat-hover"&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Formulario&lt;/th&gt;
+            &lt;th&gt;Descripción&lt;/th&gt;
+            &lt;th&gt;PDF&lt;/th&gt;
+            &lt;th&gt;Excel&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;SAT-0014&lt;/td&gt;
+            &lt;td&gt;Declaración Jurada...&lt;/td&gt;
+            &lt;td&gt;&lt;a href="#"&gt;📄&lt;/a&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;a href="#"&gt;📊&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</pre>
+                    </div>
+                    <button class="card-code-toggle" onclick="toggleCode(this)">
+                        <span>Ver CSS</span><span class="arrow">▼</span>
+                    </button>
+                    <div class="code-block" id="code-vigentes">
+                        <button class="copy-btn" onclick="copyCode('code-vigentes')">Copiar</button>
+                        <pre>.table-sat {
     width: 100% !important;
     border-collapse: collapse !important;
     background-color: #ffffff !important;
@@ -478,7 +677,7 @@
     margin: 20px 0;
 }
 
-#FormulariosVigentes th {
+.table-sat th {
     background-color: #093758 !important;
     color: #ffffff !important;
     padding: 15px 8px !important;
@@ -488,255 +687,304 @@
     line-height: 1.3;
 }
 
-#FormulariosVigentes td {
+.table-sat td {
     padding: 12px 8px !important;
     text-align: center !important;
     vertical-align: middle !important;
     border: 1px solid #e0e0e0 !important;
 }
 
-#FormulariosVigentes td:first-child {
+.table-sat td:first-child {
     text-align: left !important;
     padding-left: 15px !important;
 }
 
-#FormulariosVigentes img {
+.table-sat img {
     max-width: 35px !important;
     height: auto !important;
     border-radius: 4px;
     transition: transform 0.2s ease;
 }
 
-#FormulariosVigentes a {
+.table-sat a {
     display: inline-block;
     transition: transform 0.2s ease;
     text-decoration: none;
 }
 
-#FormulariosVigentes a:hover img {
+.table-sat a:hover img {
     transform: scale(1.05);
 }
 
-#FormulariosVigentes tbody tr:nth-child(even) { background-color: #f8f9fa; }
-#FormulariosVigentes tbody tr:nth-child(odd) { background-color: #ffffff; }</pre>
+/* Variantes Striped y Hover */
+.table-sat-striped tbody tr:nth-child(even) { background-color: #f8f9fa !important; }
+.table-sat-hover tbody tr:hover { background-color: #eef3ff !important; }</pre>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- ================================
+        <!-- ================================
          ANEXOS
          ================================ -->
-    <section class="section" id="anexos">
-        <h2 class="section-title">Tabla Formularios Vigentes — Anexos</h2>
-        <p class="section-desc">Variante con la segunda columna también alineada a la izquierda para descripción extendida.</p>
+        <section class="section" id="anexos">
+            <h2 class="section-title">Variante Anexos</h2>
+            <p class="section-desc">Usa <code>.table-sat-anexo</code> para alinear la segunda columna a la izquierda.
+            </p>
 
-        <div class="component-card">
-            <div class="card-header">
-                <span class="card-title">#FormulariosVigentesAnexo / #FormulariosNoVigentesAnexo</span>
-                <div class="card-tags">
-                    <span class="tag wp">WordPress</span>
-                    <span class="tag css">CSS</span>
+            <div class="component-card">
+                <div class="card-header">
+                    <span class="card-title">.table-sat .table-sat-anexo</span>
+                    <div class="card-tags">
+                        <span class="tag wp">Utility Class</span>
+                        <span class="tag css">CSS</span>
+                    </div>
                 </div>
-            </div>
-            <div class="card-preview">
-                <div class="table-preview">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Código</th>
-                                <th>Descripción del Anexo</th>
-                                <th>PDF</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Anexo A</td><td style="text-align:left;padding-left:16px;">Detalle de Ingresos por Actividad Económica</td><td><span class="dl-icon">📄</span></td></tr>
-                            <tr><td>Anexo B</td><td style="text-align:left;padding-left:16px;">Relación de Costos y Gastos de Operación</td><td><span class="dl-icon">📄</span></td></tr>
-                            <tr><td>Anexo C</td><td style="text-align:left;padding-left:16px;">Detalle de Retenciones Practicadas</td><td><span class="dl-icon">📄</span></td></tr>
-                        </tbody>
-                    </table>
+                <div class="card-preview">
+                    <div class="table-preview">
+                        <table class="table-sat table-sat-striped table-sat-anexo">
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Descripción del Anexo</th>
+                                    <th>PDF</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Anexo A</td>
+                                    <td>Detalle de Ingresos por Actividad
+                                        Económica</td>
+                                    <td><span class="dl-icon">📄</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Anexo B</td>
+                                    <td>Relación de Costos y Gastos de
+                                        Operación</td>
+                                    <td><span class="dl-icon">📄</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Anexo C</td>
+                                    <td>Detalle de Retenciones Practicadas
+                                    </td>
+                                    <td><span class="dl-icon">📄</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-            <div class="card-code">
-                <button class="card-code-toggle" onclick="toggleCode(this)">
-                    <span>Ver CSS adicional para Anexos</span><span class="arrow">▼</span>
-                </button>
-                <div class="code-block" id="code-anexos">
-                    <button class="copy-btn" onclick="copyCode('code-anexos')">Copiar</button>
-<pre>/* Segunda columna alineada a la izquierda para Anexos */
-#FormulariosVigentesAnexo td:nth-child(2),
-#FormulariosNoVigentesAnexo td:nth-child(2) {
+                <div class="card-code">
+                    <button class="card-code-toggle" onclick="toggleCode(this)">
+                        <span>Ver HTML</span><span class="arrow">▼</span>
+                    </button>
+                    <div class="code-block" id="html-anexos">
+                        <button class="copy-btn" onclick="copyCode('html-anexos')">Copiar</button>
+                        <pre>&lt;table class="table-sat table-sat-striped table-sat-anexo"&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Código&lt;/th&gt;
+            &lt;th&gt;Descripción del Anexo&lt;/th&gt;
+            &lt;th&gt;PDF&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Anexo A&lt;/td&gt;
+            &lt;td&gt;Detalle de Ingresos...&lt;/td&gt;
+            &lt;td&gt;&lt;span class="dl-icon"&gt;📄&lt;/span&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</pre>
+                    </div>
+                    <button class="card-code-toggle" onclick="toggleCode(this)">
+                        <span>Ver CSS adicional para Anexos</span><span class="arrow">▼</span>
+                    </button>
+                    <div class="code-block" id="code-anexos">
+                        <button class="copy-btn" onclick="copyCode('code-anexos')">Copiar</button>
+                        <pre>/* Segunda columna alineada a la izquierda */
+.table-sat-anexo td:nth-child(2) {
     text-align: left !important;
     padding-left: 15px !important;
 }</pre>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- ================================
+        <!-- ================================
          GESTIÓN (2 columnas)
          ================================ -->
-    <section class="section" id="gestion">
-        <h2 class="section-title">Tablas de Gestión (2 columnas)</h2>
-        <p class="section-desc">Tablas tipo .autr, .gestae, .gestc, .gestd, .gestp — 25% código + 75% descripción.</p>
+        <section class="section" id="gestion">
+            <h2 class="section-title">Variante Gestión (2 columnas)</h2>
+            <p class="section-desc">Usa <code>.table-sat-gestion</code> para distribución 25% / 75%.</p>
 
-        <div class="component-card">
-            <div class="card-header">
-                <span class="card-title">table.autr / table.gestae / table.gestc / table.gestd / table.gestp</span>
-                <div class="card-tags">
-                    <span class="tag wp">WordPress</span>
-                    <span class="tag css">CSS</span>
+            <div class="component-card">
+                <div class="card-header">
+                    <span class="card-title">.table-sat .table-sat-gestion</span>
+                    <div class="card-tags">
+                        <span class="tag wp">Utility Class</span>
+                        <span class="tag css">CSS</span>
+                    </div>
                 </div>
-            </div>
-            <div class="card-preview">
-                <div class="table-preview table-2col">
-                    <table>
-                        <thead>
-                            <tr><th style="width:25%;">Código</th><th style="width:75%;">Descripción</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>GEST-001</td><td>Solicitud de inscripción de contribuyente</td></tr>
-                            <tr><td>GEST-002</td><td>Actualización de datos del Registro Tributario Unificado</td></tr>
-                            <tr><td>GEST-003</td><td>Solicitud de habilitación de libros contables</td></tr>
-                            <tr><td>AUTR-001</td><td>Autorización de facturas y documentos tributarios</td></tr>
-                        </tbody>
-                    </table>
+                <div class="card-preview">
+                    <div class="table-preview">
+                        <table class="table-sat table-sat-striped table-sat-gestion">
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Descripción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>GEST-001</td>
+                                    <td>Solicitud de inscripción de contribuyente</td>
+                                </tr>
+                                <tr>
+                                    <td>GEST-002</td>
+                                    <td>Actualización de datos del Registro Tributario Unificado</td>
+                                </tr>
+                                <tr>
+                                    <td>GEST-003</td>
+                                    <td>Solicitud de habilitación de libros contables</td>
+                                </tr>
+                                <tr>
+                                    <td>AUTR-001</td>
+                                    <td>Autorización de facturas y documentos tributarios</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-            <div class="card-code">
-                <button class="card-code-toggle" onclick="toggleCode(this)">
-                    <span>Ver CSS</span><span class="arrow">▼</span>
-                </button>
-                <div class="code-block" id="code-gestion">
-                    <button class="copy-btn" onclick="copyCode('code-gestion')">Copiar</button>
-<pre>table.autr, table.gestae, table.gestc,
-table.gestd, table.gestp {
-    width: 100% !important;
-    border-collapse: collapse !important;
-    background-color: #ffffff !important;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    border-radius: 8px;
-    overflow: hidden;
-    margin: 20px 0;
-}
-
-table.autr th, table.gestae th, table.gestc th,
-table.gestd th, table.gestp th {
-    background-color: #093758 !important;
-    color: #ffffff !important;
-    padding: 15px 8px !important;
-    text-align: center !important;
-    font-weight: bold;
-    border: 1px solid #093758 !important;
-}
-
-table.autr td, table.gestae td, table.gestc td,
-table.gestd td, table.gestp td {
-    padding: 12px 8px !important;
-    text-align: center !important;
-    vertical-align: middle !important;
-    border: 1px solid #e0e0e0 !important;
-}
-
-/* Primera columna — Código (25%) */
-table.autr td:first-child, table.gestae td:first-child,
-table.gestc td:first-child, table.gestd td:first-child,
-table.gestp td:first-child {
+                <div class="card-code">
+                    <button class="card-code-toggle" onclick="toggleCode(this)">
+                        <span>Ver HTML</span><span class="arrow">▼</span>
+                    </button>
+                    <div class="code-block" id="html-gestion">
+                        <button class="copy-btn" onclick="copyCode('html-gestion')">Copiar</button>
+                        <pre>&lt;table class="table-sat table-sat-striped table-sat-gestion"&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Código&lt;/th&gt;
+            &lt;th&gt;Descripción&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;GEST-001&lt;/td&gt;
+            &lt;td&gt;Solicitud de inscripción...&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</pre>
+                    </div>
+                    <button class="card-code-toggle" onclick="toggleCode(this)">
+                        <span>Ver CSS</span><span class="arrow">▼</span>
+                    </button>
+                    <div class="code-block" id="code-gestion">
+                        <button class="copy-btn" onclick="copyCode('code-gestion')">Copiar</button>
+                        <pre>/* Variante Gestión (2 columnas) */
+.table-sat-gestion td:first-child {
     width: 25% !important;
     text-align: left !important;
     padding-left: 15px !important;
 }
 
-/* Segunda columna — Descripción (75%) */
-table.autr td:nth-child(2), table.gestae td:nth-child(2),
-table.gestc td:nth-child(2), table.gestd td:nth-child(2),
-table.gestp td:nth-child(2) {
+.table-sat-gestion td:nth-child(2) {
     width: 75% !important;
     text-align: left !important;
     padding-left: 15px !important;
-}
-
-/* Filas alternas */
-table.autr tbody tr:nth-child(even), table.gestae tbody tr:nth-child(even),
-table.gestc tbody tr:nth-child(even), table.gestd tbody tr:nth-child(even),
-table.gestp tbody tr:nth-child(even) { background-color: #f8f9fa; }
-
-table.autr tbody tr:nth-child(odd), table.gestae tbody tr:nth-child(odd),
-table.gestc tbody tr:nth-child(odd), table.gestd tbody tr:nth-child(odd),
-table.gestp tbody tr:nth-child(odd) { background-color: #ffffff; }</pre>
+}</pre>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- ================================
+        <!-- ================================
          VISTA MOBILE
          ================================ -->
-    <section class="section" id="mobile">
-        <h2 class="section-title">Vista Mobile — Cards</h2>
-        <p class="section-desc">En pantallas pequeñas, las tablas se transforman en tarjetas individuales para mejor legibilidad.</p>
+        <section class="section" id="mobile">
+            <h2 class="section-title">Vista Mobile Responsive</h2>
+            <p class="section-desc">Añade <code>.table-sat-responsive</code> para transformar la tabla en tarjetas en
+                móviles.</p>
 
-        <div class="component-card">
-            <div class="card-header">
-                <span class="card-title">Mobile Card Layout (< 768px)</span>
-                <div class="card-tags">
-                    <span class="tag responsive">Responsive</span>
-                    <span class="tag css">CSS</span>
+            <div class="component-card">
+                <div class="card-header">
+                    <span class="card-title">.table-sat-responsive (< 768px)</span>
+                            <div class="card-tags">
+                                <span class="tag responsive">Responsive</span>
+                                <span class="tag css">CSS</span>
+                            </div>
                 </div>
-            </div>
-            <div class="card-preview" style="max-width:380px; margin:0 auto;">
-                <div class="table-mobile-preview">
-                    <div class="table-card-item">
-                        <div class="item-code">SAT-0014</div>
-                        <div class="item-desc">Declaración Jurada Anual y Mensual del ISR</div>
-                        <div class="item-actions">
-                            <a href="#">📄 PDF</a>
-                            <a href="#">📊 Excel</a>
+                <div class="card-preview" style="max-width:380px; margin:0 auto;">
+                    <div class="table-mobile-preview">
+                        <div class="table-card-item">
+                            <div class="item-code">SAT-0014</div>
+                            <div class="item-desc">Declaración Jurada Anual y Mensual del ISR</div>
+                            <div class="item-actions">
+                                <a href="#">📄 PDF</a>
+                                <a href="#">📊 Excel</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="table-card-item">
-                        <div class="item-code">SAT-0085</div>
-                        <div class="item-desc">Formulario de IVA General</div>
-                        <div class="item-actions">
-                            <a href="#">📄 PDF</a>
-                            <a href="#">📊 Excel</a>
+                        <div class="table-card-item">
+                            <div class="item-code">SAT-0085</div>
+                            <div class="item-desc">Formulario de IVA General</div>
+                            <div class="item-actions">
+                                <a href="#">📄 PDF</a>
+                                <a href="#">📊 Excel</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="table-card-item">
-                        <div class="item-code">SAT-2237</div>
-                        <div class="item-desc">Declaración Mensual de Retenciones ISR</div>
-                        <div class="item-actions">
-                            <a href="#">📄 PDF</a>
-                            <a href="#">📊 Excel</a>
+                        <div class="table-card-item">
+                            <div class="item-code">SAT-2237</div>
+                            <div class="item-desc">Declaración Mensual de Retenciones ISR</div>
+                            <div class="item-actions">
+                                <a href="#">📄 PDF</a>
+                                <a href="#">📊 Excel</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-code">
-                <button class="card-code-toggle" onclick="toggleCode(this)">
-                    <span>Ver CSS responsive</span><span class="arrow">▼</span>
-                </button>
-                <div class="code-block" id="code-mobile">
-                    <button class="copy-btn" onclick="copyCode('code-mobile')">Copiar</button>
-<pre>/* ====== RESPONSIVE: TABLAS A CARDS ====== */
+                <div class="card-code">
+                    <button class="card-code-toggle" onclick="toggleCode(this)">
+                        <span>Ver HTML</span><span class="arrow">▼</span>
+                    </button>
+                    <div class="code-block" id="html-mobile">
+                        <button class="copy-btn" onclick="copyCode('html-mobile')">Copiar</button>
+                        <pre>&lt;!-- Añadir clase .table-sat-responsive para activar cards en móvil --&gt;
+&lt;table class="table-sat table-sat-responsive"&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Código&lt;/th&gt;
+            &lt;th&gt;Descripción&lt;/th&gt;
+            &lt;th&gt;Acciones&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;SAT-0014&lt;/td&gt;
+            &lt;td&gt;Declaración Jurada...&lt;/td&gt;
+            &lt;td&gt;
+                &lt;a href="#"&gt;PDF&lt;/a&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</pre>
+                    </div>
+                    <button class="card-code-toggle" onclick="toggleCode(this)">
+                        <span>Ver CSS responsive</span><span class="arrow">▼</span>
+                    </button>
+                    <div class="code-block" id="code-mobile">
+                        <button class="copy-btn" onclick="copyCode('code-mobile')">Copiar</button>
+                        <pre>/* ====== RESPONSIVE: TABLAS A CARDS ====== */
 @media (max-width: 768px) {
-    #FormulariosVigentes,
-    #FormulariosVigentesAnexo,
-    #FormulariosNoVigentes,
-    #FormulariosNoVigentesAnexo {
+    .table-sat-responsive {
         box-shadow: none;
     }
 
-    #FormulariosVigentes thead,
-    #FormulariosVigentesAnexo thead,
-    #FormulariosNoVigentes thead,
-    #FormulariosNoVigentesAnexo thead {
+    .table-sat-responsive thead {
         display: none;
     }
 
-    #FormulariosVigentes tbody tr,
-    #FormulariosNoVigentes tbody tr {
+    .table-sat-responsive tbody tr {
         display: block;
         margin-bottom: 12px;
         border: 1px solid #e0e0e0;
@@ -746,61 +994,58 @@ table.gestp tbody tr:nth-child(odd) { background-color: #ffffff; }</pre>
         box-shadow: 0 1px 4px rgba(0,0,0,0.04);
     }
 
-    #FormulariosVigentes tbody td,
-    #FormulariosNoVigentes tbody td {
+    .table-sat-responsive tbody td {
         display: block;
         text-align: left !important;
         padding: 6px 0 !important;
         border: none !important;
     }
 
-    #FormulariosVigentes tbody td:first-child,
-    #FormulariosNoVigentes tbody td:first-child {
+    .table-sat-responsive tbody td:first-child {
         font-weight: 700;
         color: #093758;
         font-size: 15px;
         padding-left: 0 !important;
     }
 
-    #FormulariosVigentes tbody td img,
-    #FormulariosNoVigentes tbody td img {
+    .table-sat-responsive tbody td img {
         max-width: 28px !important;
     }
 }</pre>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- ================================
+        <!-- ================================
          CSS COMPLETO
          ================================ -->
-    <section class="section" id="css-completo">
-        <h2 class="section-title">CSS Completo — Copiar y Pegar</h2>
-        <p class="section-desc">Todo el CSS de tablas en un solo bloque para pegar en WordPress → Apariencia → CSS Adicional.</p>
+        <section class="section" id="css-completo">
+            <h2 class="section-title">CSS Completo — Copiar y Pegar</h2>
+            <p class="section-desc">Todo el CSS de tablas en un solo bloque para pegar en WordPress → Apariencia → CSS
+                Adicional.</p>
 
-        <div class="component-card">
-            <div class="card-header">
-                <span class="card-title">CSS Completo — Todas las tablas + Responsive</span>
-                <div class="card-tags">
-                    <span class="tag wp">WordPress</span>
-                    <span class="tag css">CSS</span>
-                    <span class="tag responsive">Responsive</span>
+            <div class="component-card">
+                <div class="card-header">
+                    <span class="card-title">CSS Completo — Todas las tablas + Responsive</span>
+                    <div class="card-tags">
+                        <span class="tag wp">WordPress</span>
+                        <span class="tag css">CSS</span>
+                        <span class="tag responsive">Responsive</span>
+                    </div>
                 </div>
-            </div>
-            <div class="card-code">
-                <button class="card-code-toggle open" onclick="toggleCode(this)">
-                    <span>Ver CSS completo</span><span class="arrow">▼</span>
-                </button>
-                <div class="code-block show" id="code-full">
-                    <button class="copy-btn" onclick="copyCode('code-full')">Copiar</button>
-<pre>/* ========================================
+                <div class="card-code">
+                    <button class="card-code-toggle open" onclick="toggleCode(this)">
+                        <span>Ver CSS completo</span><span class="arrow">▼</span>
+                    </button>
+                    <div class="code-block show" id="code-full">
+                        <button class="copy-btn" onclick="copyCode('code-full')">Copiar</button>
+                        <pre>/* ========================================
    PORTAL SAT GT — TABLAS CSS COMPLETO
    ======================================== */
 
-/* === Base para todas las tablas === */
-#FormulariosVigentes, #FormulariosVigentesAnexo,
-#FormulariosNoVigentes, #FormulariosNoVigentesAnexo {
+/* === Base .table-sat === */
+.table-sat {
     width: 100% !important;
     border-collapse: collapse !important;
     background-color: #ffffff !important;
@@ -810,9 +1055,7 @@ table.gestp tbody tr:nth-child(odd) { background-color: #ffffff; }</pre>
     margin: 20px 0;
 }
 
-/* === Encabezados === */
-#FormulariosVigentes th, #FormulariosVigentesAnexo th,
-#FormulariosNoVigentes th, #FormulariosNoVigentesAnexo th {
+.table-sat th {
     background-color: #093758 !important;
     color: #ffffff !important;
     padding: 15px 8px !important;
@@ -822,126 +1065,72 @@ table.gestp tbody tr:nth-child(odd) { background-color: #ffffff; }</pre>
     line-height: 1.3;
 }
 
-/* === Celdas === */
-#FormulariosVigentes td, #FormulariosVigentesAnexo td,
-#FormulariosNoVigentes td, #FormulariosNoVigentesAnexo td {
+.table-sat td {
     padding: 12px 8px !important;
     text-align: center !important;
     vertical-align: middle !important;
     border: 1px solid #e0e0e0 !important;
 }
 
-/* === Primera columna a la izquierda === */
-#FormulariosVigentes td:first-child, #FormulariosVigentesAnexo td:first-child,
-#FormulariosNoVigentes td:first-child, #FormulariosNoVigentesAnexo td:first-child {
-    text-align: left !important;
-    padding-left: 15px !important;
-}
-
-/* === Segunda columna Anexos a la izquierda === */
-#FormulariosVigentesAnexo td:nth-child(2),
-#FormulariosNoVigentesAnexo td:nth-child(2) {
+.table-sat td:first-child {
     text-align: left !important;
     padding-left: 15px !important;
 }
 
 /* === Imágenes === */
-#FormulariosVigentes img, #FormulariosVigentesAnexo img,
-#FormulariosNoVigentes img, #FormulariosNoVigentesAnexo img {
+.table-sat img {
     max-width: 35px !important;
     height: auto !important;
     border-radius: 4px;
     transition: transform 0.2s ease;
 }
 
-/* === Hover === */
-#FormulariosVigentes a, #FormulariosVigentesAnexo a,
-#FormulariosNoVigentes a, #FormulariosNoVigentesAnexo a {
+/* === Hover Links === */
+.table-sat a {
     display: inline-block;
     transition: transform 0.2s ease;
     text-decoration: none;
 }
 
-#FormulariosVigentes a:hover img, #FormulariosVigentesAnexo a:hover img,
-#FormulariosNoVigentes a:hover img, #FormulariosNoVigentesAnexo a:hover img {
+.table-sat a:hover img {
     transform: scale(1.05);
 }
 
-/* === Filas alternas === */
-#FormulariosVigentes tbody tr:nth-child(even), #FormulariosVigentesAnexo tbody tr:nth-child(even),
-#FormulariosNoVigentes tbody tr:nth-child(even), #FormulariosNoVigentesAnexo tbody tr:nth-child(even) {
-    background-color: #f8f9fa;
+/* === Variantes (Striped / Hover) === */
+.table-sat-striped tbody tr:nth-child(even) {
+    background-color: #f8f9fa !important;
 }
 
-#FormulariosVigentes tbody tr:nth-child(odd), #FormulariosVigentesAnexo tbody tr:nth-child(odd),
-#FormulariosNoVigentes tbody tr:nth-child(odd), #FormulariosNoVigentesAnexo tbody tr:nth-child(odd) {
-    background-color: #ffffff;
+.table-sat-hover tbody tr:hover {
+    background-color: #eef3ff !important;
 }
 
-/* === Tablas de Gestión (2 columnas) === */
-table.autr, table.gestae, table.gestc,
-table.gestd, table.gestp {
-    width: 100% !important;
-    border-collapse: collapse !important;
-    background-color: #ffffff !important;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    border-radius: 8px;
-    overflow: hidden;
-    margin: 20px 0;
+/* === Variante: Anexos === */
+.table-sat-anexo td:nth-child(2) {
+    text-align: left !important;
+    padding-left: 15px !important;
 }
 
-table.autr th, table.gestae th, table.gestc th,
-table.gestd th, table.gestp th {
-    background-color: #093758 !important;
-    color: #ffffff !important;
-    padding: 15px 8px !important;
-    text-align: center !important;
-    font-weight: bold;
-    border: 1px solid #093758 !important;
-}
-
-table.autr td, table.gestae td, table.gestc td,
-table.gestd td, table.gestp td {
-    padding: 12px 8px !important;
-    text-align: center !important;
-    vertical-align: middle !important;
-    border: 1px solid #e0e0e0 !important;
-}
-
-table.autr td:first-child, table.gestae td:first-child,
-table.gestc td:first-child, table.gestd td:first-child,
-table.gestp td:first-child {
+/* === Variante: Gestión (2 columnas) === */
+.table-sat-gestion td:first-child {
     width: 25% !important;
     text-align: left !important;
     padding-left: 15px !important;
 }
 
-table.autr td:nth-child(2), table.gestae td:nth-child(2),
-table.gestc td:nth-child(2), table.gestd td:nth-child(2),
-table.gestp td:nth-child(2) {
+.table-sat-gestion td:nth-child(2) {
     width: 75% !important;
     text-align: left !important;
     padding-left: 15px !important;
 }
 
-table.autr tbody tr:nth-child(even), table.gestae tbody tr:nth-child(even),
-table.gestc tbody tr:nth-child(even), table.gestd tbody tr:nth-child(even),
-table.gestp tbody tr:nth-child(even) { background-color: #f8f9fa; }
-
-table.autr tbody tr:nth-child(odd), table.gestae tbody tr:nth-child(odd),
-table.gestc tbody tr:nth-child(odd), table.gestd tbody tr:nth-child(odd),
-table.gestp tbody tr:nth-child(odd) { background-color: #ffffff; }
-
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
-    #FormulariosVigentes, #FormulariosVigentesAnexo,
-    #FormulariosNoVigentes, #FormulariosNoVigentesAnexo { box-shadow: none; }
+    .table-sat-responsive { box-shadow: none; }
 
-    #FormulariosVigentes thead, #FormulariosVigentesAnexo thead,
-    #FormulariosNoVigentes thead, #FormulariosNoVigentesAnexo thead { display: none; }
+    .table-sat-responsive thead { display: none; }
 
-    #FormulariosVigentes tbody tr, #FormulariosVigentesAnexo tbody tr,
-    #FormulariosNoVigentes tbody tr, #FormulariosNoVigentesAnexo tbody tr {
+    .table-sat-responsive tbody tr {
         display: block;
         margin-bottom: 12px;
         border: 1px solid #e0e0e0;
@@ -951,66 +1140,66 @@ table.gestp tbody tr:nth-child(odd) { background-color: #ffffff; }
         box-shadow: 0 1px 4px rgba(0,0,0,0.04);
     }
 
-    #FormulariosVigentes tbody td, #FormulariosVigentesAnexo tbody td,
-    #FormulariosNoVigentes tbody td, #FormulariosNoVigentesAnexo tbody td {
+    .table-sat-responsive tbody td {
         display: block;
         text-align: left !important;
         padding: 6px 0 !important;
         border: none !important;
     }
 
-    #FormulariosVigentes tbody td:first-child, #FormulariosNoVigentes tbody td:first-child {
+    .table-sat-responsive tbody td:first-child {
         font-weight: 700;
         color: #093758;
         font-size: 15px;
         padding-left: 0 !important;
     }
 
-    #FormulariosVigentes tbody td img, #FormulariosNoVigentes tbody td img {
+    .table-sat-responsive tbody td img {
         max-width: 28px !important;
     }
 }</pre>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-</div>
+    </div>
 
-<!-- TOAST -->
-<div class="toast" id="toast"></div>
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
 
-<script>
-    function toggleCode(btn) {
-        btn.classList.toggle('open');
-        btn.nextElementSibling.classList.toggle('show');
-    }
+    <script>
+        function toggleCode(btn) {
+            btn.classList.toggle('open');
+            btn.nextElementSibling.classList.toggle('show');
+        }
 
-    function copyCode(blockId) {
-        const block = document.getElementById(blockId);
-        const text = block.querySelector('pre').textContent;
-        navigator.clipboard.writeText(text).then(() => {
-            const btn = block.querySelector('.copy-btn');
-            btn.textContent = '✓ Copiado';
-            btn.classList.add('copied');
-            showToast('Código copiado al portapapeles');
-            setTimeout(() => { btn.textContent = 'Copiar'; btn.classList.remove('copied'); }, 2000);
-        });
-    }
+        function copyCode(blockId) {
+            const block = document.getElementById(blockId);
+            const text = block.querySelector('pre').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = block.querySelector('.copy-btn');
+                btn.textContent = '✓ Copiado';
+                btn.classList.add('copied');
+                showToast('Código copiado al portapapeles');
+                setTimeout(() => { btn.textContent = 'Copiar'; btn.classList.remove('copied'); }, 2000);
+            });
+        }
 
-    function showToast(msg) {
-        const t = document.getElementById('toast');
-        t.textContent = msg;
-        t.classList.add('show');
-        setTimeout(() => t.classList.remove('show'), 2200);
-    }
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 2200);
+        }
 
-    function scrollTo(id) {
-        document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-        document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
-        event.target.classList.add('active');
-    }
-</script>
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+            document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+    </script>
 
 </body>
+
 </html>
